@@ -7,10 +7,13 @@
 负责人已将主线调整为“课程关联每日行动打卡、多企业员工、后台统计”。
 
 - [最新需求与后端接手说明](docs/ACTION-BACKEND-HANDOFF.md)
+- [行动口径表](docs/ACTION-METRICS.md)：四项行动的判定、状态机、排行口径。**改规则先改这里**
 - [最新前端预览](frontend/action-preview/index.html)：今天、课程、排行、团队、我的；含创建/加入团队UI。下载后用浏览器打开。
 - [前端运行与模拟边界](frontend/action-preview/README.md)
+- [后端最小闭环](server/README.md)：`cd server && npm run seed && npm start` → http://127.0.0.1:8787/ 可点、可写库
+- [新方向评估](docs/REVIEW-03.md)：变化、可行性、风险与待拍板项
 
-旧`prototype/index.html`保留历史，不能直接当作新版前端。所有新前端数据为模拟，后端尚未接入；现有工作进展请以DEVLOG最新编号为准。
+旧`prototype/index.html`保留历史，不能直接当作新版前端。所有新前端数据为模拟，后端尚未接入生产；现有工作进展请以DEVLOG最新编号为准。
 
 ## 从这里开始
 

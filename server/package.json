@@ -1,0 +1,16 @@
+{
+  "name": "hongxin-action-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "鸿心课程行动平台 · 后端最小闭环（本地/隔离测试环境）",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "seed": "node src/seed.js",
+    "test": "node --test test/*.test.js",
+    "reset": "node src/seed.js --reset"
+  }
+}

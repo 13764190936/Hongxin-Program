@@ -19,3 +19,9 @@ coverage/
 *.log
 __pycache__/
 .venv/
+
+# 本地后端数据库与临时文件
+server/data/
+server/*.db
+server/*.db-wal
+server/*.db-shm
