@@ -2,405 +2,599 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>鸿心 · 每日行动</title>
 <style>
 :root{
-  --paper:#f4f3ee; --card:#fbfaf6; --ink:#1f3830; --muted:#78877e;
-  --green:#22624b; --line:#e3e6da; --soft:#e9efe2; --warn:#8a5f16; --warnbg:#fbf2df; --red:#9c3a2e;
+  --paper:#f6f5f0; --card:#fffefb; --ink:#1d352c; --muted:#7c8a81;
+  --green:#22624b; --green2:#e8efe1; --line:#e5e8dd; --line2:#eef0e8;
+  --warn:#8a5f16; --warnbg:#fbf2df; --radius:18px;
 }
-*{box-sizing:border-box}
-body{margin:0;background:#e7e9e1;color:var(--ink);font:14px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
-button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
-input,select{font:inherit}
-.wrap{max-width:1000px;margin:0 auto;padding:0 20px 90px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;min-height:100vh;background:#dde1d7;color:var(--ink);
+  font:14px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",sans-serif;
+  display:flex;justify-content:center;align-items:flex-start;padding:24px 0;
+}
+button{font:inherit;border:0;background:none;color:inherit;cursor:pointer;padding:0}
+input,textarea,select{font:inherit}
+.phone{
+  width:390px;height:800px;background:var(--paper);border-radius:34px;position:relative;
+  box-shadow:0 24px 60px -20px rgba(29,53,44,.35),0 0 0 9px #12211b,0 0 0 10px #2a3a33;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.status{height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-size:11.5px;font-weight:600;color:var(--ink);flex:0 0 auto}
+.status .dots{display:flex;gap:2.5px;align-items:flex-end}
+.status i{width:3px;background:var(--ink);border-radius:1px;opacity:.7}
+.bar{height:40px;flex:0 0 40px;display:flex;align-items:center;gap:8px;padding:0 16px;font-size:11px;color:var(--muted);letter-spacing:.2px}
+.bar .grow{flex:1}
+.view{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;padding:0 16px 18px;scroll-behavior:smooth}
+.view::-webkit-scrollbar{width:0}
+.tabs{flex:0 0 58px;display:flex;background:rgba(255,254,251,.94);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;color:#9aa79e}
+.tabs svg{width:21px;height:21px;stroke:#9aa79e;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tabs button.on{color:var(--green)}
+.tabs button.on svg{stroke:var(--green)}
 
-.top{position:sticky;top:0;z-index:20;background:rgba(231,233,225,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top-in{max-width:1000px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.brand{font-size:17px;font-weight:600;letter-spacing:2px}
-.brand small{display:block;font-size:9.5px;letter-spacing:2px;color:var(--muted);font-weight:400}
-.spacer{flex:1}
-.who{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
-.who b{color:var(--ink);font-weight:600}
-.switch{display:flex;background:#dde1d6;border-radius:10px;padding:3px;gap:2px}
-.switch button{font-size:12px;padding:6px 11px;border-radius:8px;color:#5d6b62}
-.switch button.on{background:#fff;color:var(--green);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+h1{font-size:25px;line-height:1.28;letter-spacing:-.6px;font-weight:600;margin:6px 0 6px}
+.eyebrow{font-size:9.5px;letter-spacing:2.2px;color:var(--muted)}
+.lead{font-size:12px;color:var(--muted);margin:0 0 4px}
+.sec{display:flex;align-items:baseline;justify-content:space-between;margin:22px 0 9px}
+.sec h2{font-size:14px;font-weight:600;margin:0}
+.sec span{font-size:11px;color:var(--muted)}
 
-.hero{padding:34px 0 6px}
-.eyebrow{font-size:10px;letter-spacing:2.4px;color:var(--muted);text-transform:uppercase}
-h1{font-size:31px;line-height:1.25;letter-spacing:-1px;font-weight:600;margin:8px 0 10px}
-.lead{color:var(--muted);font-size:13px;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.course{margin-top:12px}
+.course .t{font-size:14.5px;font-weight:600}
+.course .m{font-size:11px;color:var(--muted);margin-top:3px}
+.bar-line{height:3px;background:#eaede2;border-radius:2px;margin-top:12px;overflow:hidden}
+.bar-line i{display:block;height:100%;background:var(--green);border-radius:2px;transition:width .6s cubic-bezier(.2,.7,.3,1)}
 
-.sec{margin-top:30px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
-.sec h2{font-size:15px;font-weight:600;margin:0}
-.sec .note{font-size:11.5px;color:var(--muted)}
+.tasks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.task{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:13px;text-align:left;display:flex;flex-direction:column;gap:6px;min-height:118px;transition:.18s;position:relative;overflow:hidden}
+.task:active{transform:scale(.985)}
+.task .k{font-size:10px;color:var(--muted);letter-spacing:.4px}
+.task .n{font-size:14px;font-weight:600;letter-spacing:-.2px}
+.task .s{font-size:10.5px;color:var(--muted);margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:6px}
+.task.done{background:#f2f6ec;border-color:#d6e3cd}
+.task.done .k{color:var(--green)}
+.task.pending{background:#fdf8ee;border-color:#e8d7b3}
+.task.pending .k{color:var(--warn)}
+.task .dot{width:6px;height:6px;border-radius:50%;background:#c9d3c4}
+.task.done .dot{background:var(--green)}
+.task.pending .dot{background:#cf9f45}
 
-.course{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:12px}
-.course .t{font-size:15px;font-weight:600}
-.course .m{font-size:11.5px;color:var(--muted);margin-top:3px}
-.bar{height:4px;background:#e6e9dd;border-radius:3px;margin-top:14px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--green);border-radius:3px;transition:width .5s cubic-bezier(.2,.7,.3,1)}
-
-.tasks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
-.task{position:relative;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;transition:.18s;display:flex;flex-direction:column;min-height:154px}
-.task:hover{border-color:#c6d3c4;transform:translateY(-2px)}
-.task:disabled{cursor:default;opacity:.72;transform:none}
-.task .tag{font-size:10px;letter-spacing:.6px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:2px 8px;align-self:flex-start}
-.task.done .tag{color:var(--green);border-color:#cbdccb;background:var(--soft)}
-.task.pending .tag{color:var(--warn);border-color:#e6d3ab;background:var(--warnbg)}
-.task h3{font-size:16px;font-weight:600;margin:12px 0 4px}
-.task p{font-size:11.5px;color:var(--muted);margin:0;line-height:1.55}
-.task .foot{margin-top:auto;padding-top:12px;font-size:11.5px;color:var(--green);display:flex;justify-content:space-between;align-items:center}
-.task:disabled .foot{color:var(--muted)}
-.task .time{font-variant-numeric:tabular-nums;font-size:11px;color:var(--muted)}
-
-.evidence{background:#fff;border:1px solid #cfdcc9;border-radius:16px;padding:18px 20px;margin-top:14px;animation:rise .28s ease}
-@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.evidence.reject{border-color:#e6c9c2;background:#fdf6f4}
-.evidence h3{font-size:14px;font-weight:600;margin:0 0 12px}
-.evidence ol{margin:0;padding-left:0;list-style:none;display:grid;gap:9px}
-.evidence li{display:flex;gap:9px;font-size:12.5px;line-height:1.6}
-.evidence .n{flex:0 0 18px;height:18px;border-radius:50%;background:var(--soft);color:var(--green);font-size:10.5px;display:grid;place-items:center;font-weight:600;margin-top:2px}
-.evidence.reject .n{background:#f3e0db;color:var(--red)}
-.evidence code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;background:#f3f5ee;border-radius:5px;padding:1px 5px}
-.evidence .delta{color:var(--green);font-weight:600;font-variant-numeric:tabular-nums}
-.evidence .act{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
-.btn-s{font-size:12px;padding:7px 12px;border-radius:9px;background:var(--green);color:#fff}
-.btn-s.ghost{background:#fff;color:var(--green);border:1px solid #cbd9cb}
-.btn-s.plane{background:#fff;color:var(--ink);border:1px solid var(--line)}
-
-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
-th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #eef0e8}
-th{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.4px}
-td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
-.rank-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eef0e8}
+.rank-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line2)}
 .rank-row:last-child{border-bottom:0}
-.rank-row .pos{width:22px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-.rank-row .pos.top{color:var(--green);font-weight:600}
+.rank-row .pos{width:20px;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.rank-row .pos.top{color:var(--gold,#b58345);font-weight:600}
 .rank-row .nm{flex:1;font-size:13px}
-.rank-row .nm small{color:var(--muted);font-size:11px;margin-left:6px}
-.rank-row .val{font-variant-numeric:tabular-nums;font-weight:600}
-.rank-row.me{background:#f0f4ea;border-radius:9px;padding-left:8px;padding-right:8px}
-.up{color:var(--green);font-size:11px;margin-left:6px;animation:fade .6s}
-@keyframes fade{from{opacity:0}to{opacity:1}}
+.rank-row .nm em{font-style:normal;font-size:10px;color:var(--green);background:var(--green2);border-radius:5px;padding:1px 5px;margin-left:5px}
+.rank-row .v{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.rank-row.me{background:#f2f6ec;border-radius:10px;padding-left:8px;padding-right:8px}
 
-.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
-.kpi div{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px}
-.kpi b{display:block;font-size:23px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.25}
-.kpi span{font-size:11px;color:var(--muted)}
-.empty{color:var(--muted);font-size:12.5px;padding:16px 0}
-.hint{font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.7}
-.pill{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:20px;background:var(--soft);color:var(--green)}
+.seg{display:flex;gap:4px;background:#e9ece1;border-radius:11px;padding:3px;margin-top:12px}
+.seg button{flex:1;font-size:12px;padding:6px 0;border-radius:8px;color:#5f6d64}
+.seg button.on{background:var(--card);color:var(--green);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.chiprow{display:flex;gap:6px;overflow-x:auto;margin-top:10px;padding-bottom:2px}
+.chiprow::-webkit-scrollbar{height:0}
+.chip{flex:0 0 auto;font-size:11.5px;padding:5px 11px;border-radius:20px;border:1px solid var(--line);color:#5f6d64;background:var(--card)}
+.chip.on{background:var(--green);border-color:var(--green);color:#fff;font-weight:500}
+
+.btn{display:block;width:100%;padding:13px;border-radius:13px;background:var(--green);color:#fff;font-size:14.5px;font-weight:600;text-align:center}
+.btn:disabled{background:#dfe4d8;color:#9aa79e}
+.btn.ghost{background:var(--card);color:var(--green);border:1px solid #cfdccc}
+.btn.sm{padding:9px 14px;font-size:12.5px;width:auto;display:inline-block}
+
+.field{margin-top:14px}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}
+.input{width:100%;border:1px solid var(--line);background:#fafbf7;border-radius:11px;padding:10px 12px;font-size:13.5px;color:var(--ink);outline:none}
+.input:focus{border-color:#c6d8bf;background:#fff}
+
+.sub-head{display:flex;align-items:center;gap:10px;margin:4px 0 14px}
+.back{width:30px;height:30px;border-radius:10px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:15px;color:var(--ink)}
+.sub-head .tt{font-size:15px;font-weight:600}
+
+.time{font-size:44px;font-weight:600;letter-spacing:-2px;font-variant-numeric:tabular-nums;line-height:1.1;margin:6px 0 2px}
+.pill{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:20px;background:var(--green2);color:var(--green)}
 .pill.warn{background:var(--warnbg);color:var(--warn)}
 .pill.grey{background:#eef0e8;color:var(--muted)}
-@media(max-width:620px){
-  .wrap{padding:0 14px 80px}.top-in{padding:12px 14px}
-  h1{font-size:25px}.tasks{grid-template-columns:1fr 1fr}
-  .kpi{grid-template-columns:1fr 1fr}
-  .task{min-height:140px;padding:14px}
-  .task h3{font-size:15px}
+.note{font-size:11px;color:var(--muted);line-height:1.7;margin-top:12px}
+.hr{height:1px;background:var(--line2);margin:14px 0}
+.rec{display:flex;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line2)}
+.rec:last-child{border-bottom:0}
+.rec .k{font-size:12.5px;font-weight:500}
+.rec .m{font-size:10.5px;color:var(--muted);margin-top:1px}
+.rec .r{margin-left:auto;text-align:right;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.empty{text-align:center;color:var(--muted);font-size:12px;padding:26px 0}
+.skel{height:96px;border-radius:15px;background:linear-gradient(90deg,#eef1e8,#e4e9dd,#eef1e8);background-size:200% 100%;animation:sk 1.2s infinite;margin-top:10px}
+@keyframes sk{0%{background-position:0 0}100%{background-position:-200% 0}}
+
+.sheet{position:absolute;inset:0;background:rgba(20,30,25,.38);display:none;align-items:flex-end;z-index:40}
+.sheet.on{display:flex}
+.sheet .p{background:var(--card);width:100%;border-radius:22px 22px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom));animation:up .24s ease;max-height:82%;overflow:auto}
+@keyframes up{from{transform:translateY(26px);opacity:.5}to{transform:none;opacity:1}}
+.sheet h3{font-size:15.5px;font-weight:600;margin:0 0 6px}
+.sheet p{font-size:12.5px;color:var(--muted);line-height:1.7;margin:6px 0 0}
+.sheet .acts{display:flex;gap:10px;margin-top:18px}
+.sheet .acts .btn{flex:1}
+.toast{position:absolute;left:50%;bottom:86px;transform:translateX(-50%) translateY(8px);background:rgba(26,36,31,.94);color:#fff;font-size:12px;padding:10px 15px;border-radius:11px;opacity:0;transition:.24s;z-index:60;max-width:300px;line-height:1.5;text-align:center;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.up{color:var(--green);font-size:11px;margin-left:5px;animation:fd .5s}
+@keyframes fd{from{opacity:0}to{opacity:1}}
+@media(max-width:430px){
+  body{padding:0;background:var(--paper)}
+  .phone{width:100%;height:100dvh;border-radius:0;box-shadow:none}
 }
 </style>
 </head>
 <body>
-<div class="top">
-  <div class="top-in">
-    <div class="brand">鸿心<small>GROW THROUGH ACTION</small></div>
-    <div class="spacer"></div>
-    <div class="who">当前身份 <b id="whoName">—</b><span id="whoMeta"></span></div>
-    <div class="switch" id="switch"></div>
-  </div>
+<div class="phone">
+  <div class="status"><span id="clock">14:05</span><span class="dots"><i style="height:4px"></i><i style="height:6px"></i><i style="height:8px"></i><i style="height:10px"></i></span></div>
+  <div class="bar"><span id="barL">星禾企业</span><span class="grow"></span><span id="barR"></span></div>
+  <div class="view" id="view"><div class="skel" style="margin-top:20px"></div><div class="skel"></div></div>
+  <nav class="tabs" id="tabs"></nav>
+  <div class="sheet" id="sheet"><div class="p" id="sheetBody"></div></div>
+  <div class="toast" id="toast"></div>
 </div>
-
-<div class="wrap" id="app"></div>
 
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const kindLabel = { early:'5:31 早起', run:'晨跑', read:'阅读', visit:'拜访' };
-const metricOf = { early:'early_count', run:'run_km', read:'read_minutes' };
-const metricLabel = { early_count:'早起次数', run_km:'晨跑公里', read_minutes:'阅读分钟' };
-const statusPill = s => s === 'valid'
-  ? '<span class="pill">有效</span>'
-  : s === 'pending_review' ? '<span class="pill warn">待核</span>' : '<span class="pill grey">—</span>';
+const LABEL = { early:'5:31 早起', run:'晨跑', read:'阅读', visit:'拜访' };
+const METRIC = { early:'early_count', run:'run_km', read:'read_minutes' };
+const MLABEL = { early_count:'早起次数', run_km:'晨跑公里', read_minutes:'阅读分钟' };
+const MUNIT = { early_count:'次', run_km:'公里', read_minutes:'分钟' };
 
-const state = { users:[], me:null, today:null, rank:null, adminRows:null, event:null, busy:false };
+const S = {
+  me:null, today:null, tab:'today', sub:null,
+  scope:'team', metric:'early_count', period:'day',
+  rank:null, records:null, teams:null, busy:false,
+  readTimer:null, readSec:0, readDone:false, photo:null,
+};
+
+const TABS = [
+  ['today','今天','<path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/>'],
+  ['course','课程','<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10v16H5.5A1.5 1.5 0 0 1 4 18.5zM12 4h6.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H12z"/>'],
+  ['rank','排行','<path d="M5 19V9M12 19V5M19 19v-7"/>'],
+  ['team','团队','<circle cx="9" cy="8" r="3"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"/><path d="M16 11a3 3 0 1 0 0-6"/><path d="M18 19c0-2.5-1-4-2.5-4.6"/>'],
+  ['mine','我的','<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/>'],
+];
 
 async function api(path, { method='GET', body, raw } = {}) {
   const res = await fetch(path, {
     method,
-    headers: { 'content-type':'application/json', 'x-test-user': state.me.id },
+    headers: { 'content-type':'application/json', 'x-test-user': S.me.id },
     body: body ? JSON.stringify(body) : undefined,
   });
   if (raw) return res;
-  const text = await res.text();
-  let data; try { data = JSON.parse(text); } catch { data = text; }
-  return { ok: res.ok, status: res.status, data };
+  const t = await res.text();
+  let d; try { d = JSON.parse(t); } catch { d = t; }
+  return { ok: res.ok, status: res.status, data: d };
 }
 
-async function boot() {
-  const meta = await (await fetch('/api/meta')).json();
-  state.users = meta.users.filter(u => u.enterpriseId === 'ent-alpha');
-  const pick = state.users.find(u => u.id === 'u_lin') || state.users[0];
-  await switchTo(pick.id);
+function toast(msg) {
+  const el = $('#toast'); el.textContent = msg; el.classList.add('on');
+  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('on'), 2600);
 }
 
-async function switchTo(id) {
-  state.me = state.users.find(u => u.id === id);
-  state.event = null;
-  const [me, today] = await Promise.all([api('/api/me'), api('/api/today')]);
-  state.me = { ...state.me, ...me.data };
-  state.today = today.data;
-  state.rank = state.me.team
-    ? (await api('/api/rankings?scope=team&metric=early_count&period=day')).data
-    : null;
-  state.adminRows = state.me.role === 'admin'
-    ? (await api('/api/admin/records?limit=50')).data.rows
-    : null;
+function beijingNow() {
+  const d = new Date(Date.now() + 8 * 3600e3);
+  return { h:d.getUTCHours(), m:d.getUTCMinutes(), s:d.getUTCSeconds() };
+}
+function bjISO(h, m, s) {
+  const d = new Date();
+  const p = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(h)}:${p(m)}:${p(s)}.000+08:00`;
+}
+function todayAt(h, m, s) { return bjISO(h, m, s); }
+
+/* ---------------- 启动 ---------------- */
+async function boot(userId) {
+  if (!S.demoUsers) {
+    const meta = await (await fetch('/api/meta')).json();
+    S.demoUsers = meta.users.filter(u => u.enterpriseId === 'ent-alpha' && u.role === 'employee');
+  }
+  const id = userId || (S.demoUsers.find(u => u.id === 'u_lin') || S.demoUsers[0]).id;
+  S.me = { id };
+  const me = await api('/api/me');
+  if (!me.ok) { $('#view').innerHTML = `<div class="empty">${esc(me.data.error.message)}</div>`; return; }
+  S.me = me.data;
+  await Promise.all([loadToday(), loadRank(), loadRecords(), loadTeams()]);
   render();
 }
 
+async function loadToday() { const r = await api('/api/today'); if (r.ok) S.today = r.data; }
+async function loadRank() {
+  const r = await api(`/api/rankings?scope=${S.scope}&metric=${S.metric}&period=${S.period}`);
+  S.rank = r.ok ? r.data : null;
+}
+async function loadRecords() { const r = await api('/api/records?limit=12'); if (r.ok) S.records = r.data.rows; }
+async function loadTeams() { const r = await api('/api/teams'); if (r.ok) S.teams = r.data.rows; }
+
+/* ---------------- 渲染 ---------------- */
 function render() {
-  $('#whoName').textContent = state.me.name;
-  $('#whoMeta').textContent = state.me.role === 'admin'
-    ? '主管 · 星禾企业'
-    : `员工 · ${state.me.team ? state.me.team.name : '未加入团队'}`;
-  $('#switch').innerHTML = state.users.map(u =>
-    `<button data-user="${u.id}" class="${u.id === state.me.id ? 'on' : ''}">${u.role === 'admin' ? '主管 ' : ''}${esc(u.name)}</button>`
-  ).join('');
-  $('#app').innerHTML = state.me.role === 'admin' ? adminView() : employeeView();
+  const b = beijingNow();
+  $('#clock').textContent = `${String(b.h).padStart(2,'0')}:${String(b.m).padStart(2,'0')}`;
+  $('#barL').textContent = '星禾企业 · 卓越成长 21 天';
+  $('#barR').textContent = S.me.team ? S.me.team.name : '未加入团队';
+
+  $('#tabs').innerHTML = TABS.map(([id,label,icon]) =>
+    `<button data-tab="${id}" class="${S.tab===id?'on':''}"><svg viewBox="0 0 24 24">${icon}</svg>${label}</button>`).join('');
+
+  const view = $('#view');
+  if (S.sub) view.innerHTML = subView();
+  else view.innerHTML = ({ today:viewToday, course:viewCourse, rank:viewRank, team:viewTeam, mine:viewMine })[S.tab]();
   bind();
 }
 
-/* ---------------- 员工视图 ---------------- */
-function employeeView() {
-  const t = state.today;
-  const done = t.tasks.filter(x => x.done).length;
+function bind() {
+  document.querySelectorAll('[data-tab]').forEach(el => el.onclick = () => {
+    S.tab = el.dataset.tab; S.sub = null; render(); $('#view').scrollTop = 0;
+  });
+  document.querySelectorAll('[data-open]').forEach(el => el.onclick = () => {
+    S.sub = el.dataset.open; S.readSec = 0; S.readDone = false; S.photo = null; render(); $('#view').scrollTop = 0;
+  });
+  document.querySelectorAll('[data-back]').forEach(el => el.onclick = () => {
+    S.sub = null; stopTimer(); render();
+  });
+  document.querySelectorAll('[data-scope]').forEach(el => el.onclick = async () => {
+    S.scope = el.dataset.scope; await loadRank(); render();
+  });
+  document.querySelectorAll('[data-metric]').forEach(el => el.onclick = async () => {
+    S.metric = el.dataset.metric; await loadRank(); render();
+  });
+  document.querySelectorAll('[data-period]').forEach(el => el.onclick = async () => {
+    S.period = el.dataset.period; await loadRank(); render();
+  });
+  document.querySelectorAll('[data-sheet]').forEach(el => el.onclick = () => openSheet(el.dataset.sheet));
+  document.querySelectorAll('[data-close]').forEach(el => el.onclick = closeSheet);
+  document.querySelectorAll('[data-user]').forEach(el => el.onclick = () => boot(el.dataset.user));
+
+  const t = document.querySelector('[data-timer]');
+  if (t) t.onclick = () => { S.readSec ? stopTimer() : startTimer(); };
+  const f = document.querySelector('[data-finish]');
+  if (f) f.onclick = () => { stopTimer(); S.readDone = true; render(); };
+  const sv = document.querySelector('[data-save-read]');
+  if (sv) sv.onclick = saveRead;
+  const sr = document.querySelector('[data-save-run]');
+  if (sr) sr.onclick = saveRun;
+}
+
+function viewToday() {
+  const tasks = S.today ? S.today.tasks : [];
+  const done = tasks.filter(t => t.done).length;
   return `
-  <div class="hero">
-    <div class="eyebrow">DAILY PRACTICE / 每日行动</div>
-    <h1>${esc(state.me.name)}，今天走完 ${done} / 4 步。</h1>
-    <p class="lead">${state.me.team ? `在「${esc(state.me.team.name)}」里和伙伴一起。` : '还没有加入团队。'}所有操作都会写进数据库，换个人能看到。</p>
-  </div>
+  <div class="eyebrow">DAILY PRACTICE</div>
+  <h1>${esc(S.me.name)}，今天走完 ${done} / 4 步。</h1>
+  <p class="lead">${S.me.team ? `在「${esc(S.me.team.name)}」里，和伙伴一起。` : '还没有加入团队。'}</p>
 
-  <div class="course">
+  <div class="card course">
     <div class="t">卓越成长 · 21天行动营</div>
-    <div class="m">第 08 天 / 21 天 · 今日行动 ${done} / 4</div>
-    <div class="bar"><i style="width:${done / 4 * 100}%"></i></div>
+    <div class="m">第 08 天 / 21 天 · 今日 ${done} / 4</div>
+    <div class="bar-line"><i style="width:${done/4*100}%"></i></div>
   </div>
 
-  <div class="sec"><h2>今天的行动</h2><span class="note">点一下就写库，不是演示动画</span></div>
-  <div class="tasks">${t.tasks.map(taskCard).join('')}</div>
+  <div class="sec"><h2>今天的行动</h2><span>点开就能完成</span></div>
+  <div class="tasks">${tasks.map(t => {
+    const r = t.records[0];
+    const cls = r ? (r.status === 'valid' ? 'done' : 'pending') : '';
+    const k = r ? (r.status === 'valid' ? '已完成' : '待核') : ({early:'指定时间',run:'图片记录',read:'团队任务',visit:'自主申报'})[t.kind];
+    return `<button class="task ${cls}" data-open="${t.kind}">
+      <span class="k"><span class="dot" style="display:inline-block;margin-right:5px"></span>${k}</span>
+      <span class="n">${LABEL[t.kind]}</span>
+      <span class="s"><span>${r ? r.clientClaimedBj.slice(11,16) : '去完成'}</span><span>›</span></span>
+    </button>`;
+  }).join('')}</div>
 
-  ${state.event ? evidenceCard(state.event) : ''}
-
-  <div class="sec"><h2>小组榜 · 早起次数（今天）</h2><span class="note">${state.rank && state.rank.team ? esc(state.rank.team) : '未加入团队'}</span></div>
-  <div class="course" style="padding:12px 18px">${rankList()}</div>
-
-  <p class="hint">接着试：点上面任意一个「去完成」→ 看下面的证据；再切到顶部「主管 张敏」→ 同一条记录会出现在她的列表里。</p>`;
+  <div class="sec"><h2>今天读什么</h2><span>《传习录》</span></div>
+  <div class="card" style="display:flex;gap:12px;align-items:center">
+    <div style="width:46px;height:58px;border-radius:8px;background:linear-gradient(150deg,#3f5f7d,#2c4459);color:#fff;display:grid;place-items:center;font-size:10px;line-height:1.2;text-align:center">知行<br>合一</div>
+    <div style="flex:1">
+      <div style="font-size:13px;font-weight:600">知与行，从身边的一件事开始</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">团队共学 · 约 12 分钟</div>
+    </div>
+    <button class="btn sm" data-open="read">去读</button>
+  </div>
+  <p class="note">所有数据来自本地数据库，不是页面里的假数字。切到「我的」可以换身份看同一个团队其他人的视角。</p>`;
 }
 
-function taskCard(t) {
-  const rec = t.records[0];
-  const cls = rec ? (rec.status === 'valid' ? 'done' : 'pending') : '';
-  const time = rec ? rec.clientClaimedBj.slice(11, 16) : '';
-  const label = rec ? (rec.status === 'valid' ? '有效' : '待核') : ({ early:'指定时间', run:'图片记录', read:'团队任务', visit:'自主申报' }[t.kind]);
-  return `<button class="task ${cls}" data-act="${t.kind}" ${state.busy ? 'disabled' : ''}>
-    <span class="tag">${label}</span>
-    <h3>${kindLabel[t.kind]}</h3>
-    <p>${({ early:'北京时间 05:31 的整分钟', run:'上传运动截图并确认数据', read:'记录阅读时长并确认完成', visit:'完成后一键记录' })[t.kind]}</p>
-    <span class="foot"><span>${rec ? '已完成' : '去完成'}</span><span class="time">${time}</span></span>
-  </button>`;
+function subView() {
+  const t = S.today ? S.today.tasks.find(x => x.kind === S.sub) : null;
+  const rec = t && t.records[0];
+  const head = (title, desc) => `<div class="sub-head"><button class="back" data-back>‹</button><div><div class="tt">${title}</div><div style="font-size:10.5px;color:var(--muted)">${desc}</div></div></div>`;
+  if (S.sub === 'early') return earlyView(rec);
+  if (S.sub === 'run') return runView(rec);
+  if (S.sub === 'read') return readView(rec);
+  if (S.sub === 'visit') return visitView(rec);
+  return head('行动', '');
 }
 
-function rankList() {
-  const r = state.rank;
-  if (!r) return '<div class="empty">尚未加入团队，暂无小组排名。</div>';
-  if (!r.rows.length) return `<div class="empty">${esc(r.note || '暂无数据')}</div>`;
-  return r.rows.map(x => `<div class="rank-row ${x.isMe ? 'me' : ''}">
-    <span class="pos ${x.rank <= 3 ? 'top' : ''}">${String(x.rank).padStart(2, '0')}</span>
-    <span class="nm">${esc(x.name)}${x.isMe ? '<small>我</small>' : ''}</span>
-    <span class="val">${x.value}</span>
-    ${state.event && state.event.rankUserId === x.id ? '<span class="up">+1</span>' : ''}
-  </div>`).join('');
-}
-
-function evidenceCard(e) {
-  if (e.rejected) {
-    return `<div class="evidence reject">
-      <h3>服务端拒绝了这次提交</h3>
-      <ol>
-        <li><span class="n">1</span><div>请求已到达服务端，被规则挡下：<code>${esc(e.code)}</code></div></li>
-        <li><span class="n">2</span><div>${esc(e.message)}</div></li>
-        <li><span class="n">3</span><div>数据库里<b>没有</b>新增记录 —— 拒收不落库，所以榜单不会变。</div></li>
-      </ol>
-      <div class="act">
-        <button class="btn-s" data-sim="early">用 05:31 的情景再试一次</button>
-        <button class="btn-s plane" data-clear>知道了</button>
-      </div>
-    </div>`;
-  }
-  const r = e.record;
-  const rankText = e.rankBefore === null ? null : `${e.rankBefore} → ${e.rankAfter}`;
-  return `<div class="evidence">
-    <h3>刚才真的发生了这些</h3>
-    <ol>
-      <li><span class="n">1</span><div>写入一条记录 <code>${r.id.slice(0, 8)}</code>，项目「${kindLabel[r.kind]}」，状态 ${statusPill(r.status)}${r.reviewReason ? `（原因：${esc(r.reviewReason)}）` : ''}</div></li>
-      <li><span class="n">2</span><div>客户端时刻 <code>${r.clientClaimedBj}</code>，服务端接收 <code>${r.serverReceivedBj}</code></div></li>
-      <li><span class="n">3</span><div>${rankText === null
-        ? '这个项目不进排行（拜访不可验证，刻意不参与竞争）。'
-        : `小组榜「${esc(state.rank ? state.rank.team : '')}」${metricLabel[metricOf[r.kind]]}：<span class="delta">${rankText}</span>`}</div></li>
-      <li><span class="n">4</span><div>主管张敏的「全企业记录」里现在能查到这一条。<button class="btn-s ghost" data-user="u_alpha_admin" style="margin-left:6px">切过去看</button></div></li>
-      <li><span class="n">5</span><div>导出 CSV 会包含这一行。<button class="btn-s ghost" data-export-preview style="margin-left:6px">下载看看</button></div></li>
-    </ol>
-    <div class="act"><button class="btn-s plane" data-clear>收起</button></div>
+function earlyView(rec) {
+  const n = beijingNow();
+  const inWin = n.h === 5 && n.m === 31;
+  const status = rec ? `已记录 ${rec.clientClaimedBj.slice(11,19)}` : inWin ? '窗口已开启' : `现在 ${String(n.h).padStart(2,'0')}:${String(n.m).padStart(2,'0')}，不在窗口`;
+  return `${head('5:31 早起','EARLY START')}
+  <div class="card">
+    <span class="pill ${rec ? '' : inWin ? '' : 'grey'}">${status}</span>
+    <div class="time">${String(n.h).padStart(2,'0')}:${String(n.m).padStart(2,'0')}<span style="font-size:20px;color:var(--muted)">:${String(n.s).padStart(2,'0')}</span></div>
+    <div style="font-size:11.5px;color:var(--muted)">有效窗口 05:31:00 — 05:31:59 · 北京时间</div>
+    <div class="hr"></div>
+    ${rec
+      ? `<div style="font-size:13px">今天已完成 · ${rec.status === 'valid' ? '<span class="pill">有效</span>' : '<span class="pill warn">待核</span>'}</div>
+         <p class="note">记录号 ${rec.id.slice(0,8)} · 客户端 ${rec.clientClaimedBj.slice(11,19)} · 服务端 ${rec.serverReceivedBj.slice(11,19)}</p>`
+      : `<button class="btn" data-sheet="early" ${inWin ? '' : 'disabled'}>${inWin ? '现在打卡' : '未到打卡时间'}</button>
+         <p class="note">判定用客户端点击时刻；与服务端相差超过 3 分钟会标为待核。</p>`}
   </div>`;
 }
 
-/* ---------------- 主管视图 ---------------- */
-function adminView() {
-  const rows = state.adminRows || [];
-  const today = state.today ? state.today.bizDate : '';
-  const valid = rows.filter(r => r.status === 'valid').length;
-  const pending = rows.filter(r => r.status === 'pending_review').length;
-  const people = new Set(rows.map(r => r.userName)).size;
-  return `
-  <div class="hero">
-    <div class="eyebrow">WHAT THE MANAGER SEES</div>
-    <h1>${esc(state.me.name)}看到的，就是员工刚交的。</h1>
-    <p class="lead">这是同一个数据库、同一个接口。员工端提交一条，这里立刻多一行。</p>
-  </div>
+function runView(rec) {
+  if (rec) {
+    const m = rec.metrics || {};
+    return `${head('晨跑','MORNING RUN')}
+    <div class="card">
+      <span class="pill ${rec.status === 'valid' ? '' : 'warn'}">${rec.status === 'valid' ? '有效' : '待核'}</span>
+      <div style="display:flex;gap:18px;margin-top:14px">
+        <div><div style="font-size:11px;color:var(--muted)">距离</div><div style="font-size:20px;font-weight:600">${m.distanceKm}<span style="font-size:11px;font-weight:400"> 公里</span></div></div>
+        <div><div style="font-size:11px;color:var(--muted)">时长</div><div style="font-size:20px;font-weight:600">${m.minutes}<span style="font-size:11px;font-weight:400"> 分钟</span></div></div>
+        <div><div style="font-size:11px;color:var(--muted)">步数</div><div style="font-size:20px;font-weight:600">${m.steps}</div></div>
+      </div>
+      <p class="note">记录号 ${rec.id.slice(0,8)} · ${rec.clientClaimedBj}</p>
+    </div>`;
+  }
+  return `${head('晨跑','MORNING RUN')}
+  <div class="card">
+    <div class="eyebrow">01 / 运动截图</div>
+    <label style="display:block;margin-top:12px;border:1px dashed #d3dccc;border-radius:14px;padding:26px;text-align:center;color:var(--muted);font-size:12px">
+      <div style="font-size:26px;line-height:1">＋</div>
+      <div style="margin-top:6px">${S.photo ? '已选择图片，仅本机预览' : '选择运动截图（JPG / PNG）'}</div>
+      <input type="file" accept="image/jpeg,image/png" id="photo" style="display:none">
+    </label>
+    <p class="note">识别还没接，下面三个数字是示例值，不来自你的图片。</p>
+    <div class="field"><label>距离 / 公里</label><input class="input" id="d" value="3.2" inputmode="decimal"></div>
+    <div class="field"><label>时长 / 分钟</label><input class="input" id="m" value="26" inputmode="numeric"></div>
+    <div class="field"><label>步数</label><input class="input" id="s" value="4280" inputmode="numeric"></div>
+    <button class="btn" style="margin-top:16px" data-save-run>记录晨跑</button>
+  </div>`;
+}
 
-  <div class="kpi">
-    <div><b>${rows.length}</b><span>记录条数（近 50 条）</span></div>
-    <div><b>${valid}</b><span>有效</span></div>
-    <div><b>${pending}</b><span>待核</span></div>
-    <div><b>${people}</b><span>涉及人数</span></div>
-  </div>
-
-  <div class="sec"><h2>行动记录</h2><span class="note">只有本企业数据；导出会留痕</span></div>
-  <div class="course" style="padding:8px 18px 14px">
-    ${rows.length ? `<table>
-      <thead><tr><th>时间（北京）</th><th>姓名</th><th>团队</th><th>项目</th><th>状态</th><th class="num">指标</th></tr></thead>
-      <tbody>${rows.map(r => `<tr>
-        <td style="font-variant-numeric:tabular-nums;font-size:11.5px">${r.clientClaimedBj}</td>
-        <td>${esc(r.userName)}</td>
-        <td style="color:var(--muted);font-size:11.5px">${esc(r.teamName || '—')}</td>
-        <td>${kindLabel[r.kind]}</td>
-        <td>${statusPill(r.status)}</td>
-        <td class="num" style="font-size:11.5px">${metricText(r)}</td>
-      </tr>`).join('')}</tbody>
-    </table>` : '<div class="empty">暂无记录</div>'}
-    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn-s" data-export>导出 CSV（${rows.length} 行）</button>
-      <button class="btn-s plane" data-user="u_lin">切回员工去看</button>
+function readView(rec) {
+  if (rec) {
+    const m = rec.metrics || {};
+    return `${head('阅读','READ & REFLECT')}
+    <div class="card">
+      <span class="pill ${rec.status === 'valid' ? '' : 'warn'}">${rec.status === 'valid' ? '已完成' : '待核'}</span>
+      <div style="display:flex;gap:18px;margin-top:14px">
+        <div><div style="font-size:11px;color:var(--muted)">时长</div><div style="font-size:20px;font-weight:600">${Math.round((m.readSeconds||0)/60)}<span style="font-size:11px;font-weight:400"> 分钟</span></div></div>
+        <div><div style="font-size:11px;color:var(--muted)">任务</div><div style="font-size:20px;font-weight:600">${m.completed ? '已勾选' : '未勾选'}</div></div>
+      </div>
+      <p class="note">记录号 ${rec.id.slice(0,8)} · ${rec.clientClaimedBj}</p>
+    </div>`;
+  }
+  const mm = String(Math.floor(S.readSec/60)).padStart(2,'0');
+  const ss = String(S.readSec%60).padStart(2,'0');
+  return `${head('阅读','READ & REFLECT')}
+  <div class="card">
+    <div class="eyebrow">今日指定阅读</div>
+    <div style="font-size:14px;font-weight:600;margin:8px 0 4px">知与行，从身边的一件事开始</div>
+    <p style="font-size:11.5px;color:var(--muted);margin:0">示例内容，正式材料由课程方提供。</p>
+    <div class="time" id="rt">${mm}:${ss}</div>
+    <div style="font-size:11.5px;color:var(--muted)">${S.readSec ? '本次阅读' : '本次阅读时长'}</div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn" data-timer>${S.readSec ? '暂停' : '开始计时'}</button>
+      <button class="btn ghost" data-finish>结束阅读</button>
     </div>
+    ${S.readDone ? `
+      <div class="hr"></div>
+      <label style="display:flex;gap:9px;font-size:12.5px;align-items:flex-start">
+        <input type="checkbox" id="ck" ${S.readChecked ? 'checked' : ''} style="margin-top:3px">
+        我已完成今日指定阅读任务
+      </label>
+      <button class="btn" style="margin-top:14px" data-save-read ${S.readSec < 60 ? 'disabled' : ''}>
+        ${S.readSec < 60 ? '不足 1 分钟，不能保存' : '保存阅读记录'}
+      </button>
+      <p class="note">时长和"是否完成"分开记；不会因为读够几分钟就自动算完成。</p>` : ''}
+  </div>`;
+}
+
+function visitView(rec) {
+  if (rec) return `${head('拜访','MEET & CONNECT')}
+  <div class="card"><span class="pill">已记录</span>
+  <p class="note">今天已完成一次拜访 · ${rec.clientClaimedBj.slice(11,16)} · 记录号 ${rec.id.slice(0,8)}</p></div>`;
+  return `${head('拜访','MEET & CONNECT')}
+  <div class="card" style="text-align:center;padding:30px 16px">
+    <div style="font-size:40px;color:#96a78b;line-height:1">⌁</div>
+    <div style="font-size:15px;font-weight:600;margin-top:8px">完成一次拜访，记录一次行动。</div>
+    <p style="font-size:11.5px;color:var(--muted);margin:6px 0 0">不需要填客户姓名、地址或详情。</p>
+    <button class="btn" style="margin-top:18px" data-sheet="visit">我已完成拜访</button>
+    <p class="note">自主申报，不进排行榜。</p>
+  </div>`;
+}
+
+function viewCourse() {
+  return `<div class="eyebrow">LEARN, THEN ACT</div><h1>学有所行。</h1>
+  <p class="lead">一门课，四个每天要做的小事。</p>
+  <div class="card course"><div class="t">卓越成长 · 21天行动营</div><div class="m">第 08 天 / 21 天</div><div class="bar-line"><i style="width:38%"></i></div></div>
+  <div class="sec"><h2>课程行动</h2><span>每天四项</span></div>
+  <div class="card">
+    ${[['early','5:31 早起','每天 05:31 整分钟'],['run','晨跑','上传运动截图'],['read','指定阅读','时长 + 团队任务'],['visit','拜访','完成后自主记录']]
+      .map(([k,t,d]) => `<div class="rec"><div><div class="k">${t}</div><div class="m">${d}</div></div><button class="btn sm ghost" data-open="${k}">查看</button></div>`).join('')}
   </div>
-
-  <p class="hint">主管看不到其他企业的数据：接口在数据层强制带企业条件，不是靠前端隐藏菜单。</p>`;
+  <p class="note">视频、章节等正式学习材料尚未提供，这一版先说明课程与行动任务的关系。</p>`;
 }
 
-function metricText(r) {
-  const m = r.metrics || {};
-  if (m.distanceKm) return `${m.distanceKm} 公里`;
-  if (m.readSeconds) return `${Math.round(m.readSeconds / 60)} 分钟`;
-  if (m.selfDeclared) return '1 次';
-  return '1 次';
+function viewRank() {
+  const r = S.rank;
+  const rows = r ? r.rows : [];
+  const head = r && r.scope === 'team'
+    ? `${esc(r.team || '')} · 队内榜`
+    : '企业内团队榜';
+  return `<div class="eyebrow">GROW TOGETHER</div><h1>同行，也向上。</h1>
+  <div class="seg">${[['team','小组内'],['enterprise','企业内']].map(([k,l]) => `<button data-scope="${k}" class="${S.scope===k?'on':''}">${l}</button>`).join('')}</div>
+  <div class="chiprow">${[['early_count','早起'],['run_km','晨跑'],['read_minutes','阅读']].map(([k,l]) => `<button class="chip ${S.metric===k?'on':''}" data-metric="${k}">${l}</button>`).join('')}</div>
+  <div class="chiprow" style="margin-top:6px">${[['day','今天'],['week','本周']].map(([k,l]) => `<button class="chip ${S.period===k?'on':''}" data-period="${k}">${l}</button>`).join('')}</div>
+
+  <div class="card" style="margin-top:12px;padding:8px 14px">
+    <div style="display:flex;justify-content:space-between;padding:8px 0 6px;font-size:10.5px;color:var(--muted)">
+      <span>${head}</span><span>${r ? esc(r.metricLabel) + ' · ' + (S.period==='day'?'今天':'本周') : ''}</span>
+    </div>
+    ${rows.length ? rows.map(x => `<div class="rank-row ${x.isMe?'me':''}">
+      <span class="pos ${x.rank<=3?'top':''}">${String(x.rank).padStart(2,'0')}</span>
+      <span class="nm">${esc(x.name)}${x.isMe?'<em>我</em>':''}</span>
+      <span class="v">${x.value}<span style="font-size:10px;font-weight:400;color:var(--muted)"> ${r.unit}</span></span>
+    </div>`).join('') : `<div class="empty">${esc(r && r.note ? r.note : '暂无数据')}</div>`}
+  </div>
+  <p class="note">只做单项目排名，没有"综合分"；只在本小组或本企业内比较，不跨企业。切换上方条件看的是同一批真实数据。</p>`;
 }
 
-/* ---------------- 交互 ---------------- */
-async function submit(kind, fromSim) {
-  if (state.busy) return;
-  state.busy = true; render();
-  const metric = metricOf[kind];
-
-  let before = null;
-  if (metric && state.me.team) {
-    const r = await api(`/api/rankings?scope=team&metric=${metric}&period=day`);
-    if (r.ok) before = findMine(r.data);
+function viewTeam() {
+  const t = S.me.team;
+  if (!t) {
+    return `<div class="eyebrow">BETTER TOGETHER</div><h1>先找到一起走的人。</h1>
+    <div class="card" style="margin-top:14px;text-align:center;padding:28px 16px">
+      <div style="font-size:30px;color:#96a78b">♧</div>
+      <div style="font-size:14px;font-weight:600;margin-top:6px">还没有加入团队</div>
+      <p class="note">加入后小组榜才会出现在「排行」里。</p>
+    </div>`;
   }
+  const list = S.teams || [];
+  return `<div class="eyebrow">BETTER TOGETHER</div><h1>${esc(t.name)}</h1>
+  <p class="lead">发起人 周予安 · ${esc(S.teams && S.teams.find(x=>x.id===t.id) ? String(S.teams.find(x=>x.id===t.id).city) : '')}</p>
+  <div class="card" style="margin-top:12px">
+    <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:5px 0"><span style="color:var(--muted)">成员</span><span>${S.teams ? (S.teams.find(x=>x.id===t.id)||{}).memberCount : '—'} 人</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:5px 0"><span style="color:var(--muted)">邀请码</span><span style="font-variant-numeric:tabular-nums">${S.teams ? (S.teams.find(x=>x.id===t.id)||{}).inviteCode : '—'}</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:5px 0"><span style="color:var(--muted)">课程</span><span>卓越成长 21 天</span></div>
+  </div>
+  <div class="sec"><h2>企业内的团队</h2><span>${list.length} 支</span></div>
+  <div class="card" style="padding:6px 14px">
+    ${list.map(x => `<div class="rec"><div><div class="k">${esc(x.name)}${x.id===t.id?' <span class="pill" style="font-size:9px">我在这</span>':''}</div><div class="m">${x.memberCount} 人 · ${esc(x.city)}</div></div></div>`).join('')}
+  </div>`;
+}
 
-  const claimedAt = (kind === 'early' && fromSim)
-    ? todayAt(5, 31, 20)
-    : new Date().toISOString();
+function viewMine() {
+  const rs = S.records || [];
+  const done = S.today ? S.today.tasks.filter(t => t.done).length : 0;
+  return `<div class="eyebrow">MY GROWTH</div><h1>${esc(S.me.name)}</h1>
+  <p class="lead">星禾企业 · ${S.me.team ? esc(S.me.team.name) : '未加入团队'}</p>
+  <div class="card" style="margin-top:12px;display:flex;gap:16px">
+    <div><div style="font-size:10.5px;color:var(--muted)">今日行动</div><div style="font-size:22px;font-weight:600">${done}<span style="font-size:11px;font-weight:400"> / 4</span></div></div>
+    <div><div style="font-size:10.5px;color:var(--muted)">课程进度</div><div style="font-size:22px;font-weight:600">08<span style="font-size:11px;font-weight:400"> / 21 天</span></div></div>
+  </div>
+  <div class="sec"><h2>我的记录</h2><span>${rs.length} 条</span></div>
+  <div class="card" style="padding:6px 14px">
+    ${rs.length ? rs.map(r => `<div class="rec">
+      <div><div class="k">${LABEL[r.kind]}</div><div class="m">${r.clientClaimedBj.slice(5,16)}</div></div>
+      <div class="r">${r.status === 'valid' ? '<span class="pill" style="font-size:9.5px">有效</span>' : '<span class="pill warn" style="font-size:9.5px">待核</span>'}</div>
+    </div>`).join('') : '<div class="empty">还没有记录</div>'}
+  </div>
+  <div class="sec"><h2>切换身份</h2><span>演示用</span></div>
+  <div class="card" style="padding:8px 14px">
+    ${(S.demoUsers||[]).map(u => `<div class="rec" style="cursor:pointer" data-user="${u.id}">
+      <div><div class="k">${esc(u.name)}</div><div class="m">${u.id === S.me.id ? '当前身份' : '点击切换'}</div></div>
+      <div class="r">${u.id === S.me.id ? '✓' : '›'}</div>
+    </div>`).join('')}
+  </div>
+  <p class="note">切换身份看的是同一个团队、同一份数据。给客户演示时，用它说明"员工看到什么 / 主管看到什么"。</p>`;
+}
 
-  const payload = { kind, idempotencyKey: 'demo-' + kind + '-' + Date.now(), claimedAt };
-  if (kind === 'run') payload.payload = { distanceKm: 3.2, minutes: 26, steps: 4280, imageRef: 'local:demo', ocrMock: true };
-  if (kind === 'read') payload.payload = { readSeconds: 900, completed: true };
-  if (kind === 'visit') payload.payload = {};
-
-  const res = await api('/api/actions', { method: 'POST', body: payload });
-
-  if (!res.ok) {
-    state.event = { rejected: true, code: res.data.error.code, message: res.data.error.message };
-    state.busy = false; render(); return;
-  }
-
-  let after = before;
-  if (metric && state.me.team) {
-    const r2 = await api(`/api/rankings?scope=team&metric=${metric}&period=day`);
-    if (r2.ok) after = findMine(r2.data);
-  }
-
-  state.event = {
-    record: res.data.record,
-    rankBefore: before,
-    rankAfter: after,
-    rankUserId: state.me.id,
-    idempotent: res.data.idempotent,
-  };
-  await refresh();
-  state.busy = false;
+/* ---------------- 提交 ---------------- */
+function stopTimer() {
+  if (S.readTimer) { clearInterval(S.readTimer); S.readTimer = null; }
+}
+function startTimer() {
+  stopTimer();
+  S.readTimer = setInterval(() => {
+    S.readSec++;
+    const el = document.getElementById('rt');
+    if (el) el.textContent = `${String(Math.floor(S.readSec/60)).padStart(2,'0')}:${String(S.readSec%60).padStart(2,'0')}`;
+  }, 1000);
+  const btn = document.querySelector('[data-timer]');
+  if (btn) btn.textContent = '暂停';
   render();
 }
 
-function findMine(data) {
-  const row = (data.rows || []).find(x => x.isMe);
+async function submit(kind, payload, claimedAt) {
+  if (S.busy) return;
+  S.busy = true;
+  const before = await rankValue(kind);
+  const r = await api('/api/actions', {
+    method: 'POST',
+    body: { kind, idempotencyKey: `app-${kind}-${Date.now()}`, claimedAt: claimedAt || new Date().toISOString(), payload: payload || {} },
+  });
+  S.busy = false;
+  if (!r.ok) { toast(r.data.error.message); return false; }
+  const rec = r.data.record;
+  await Promise.all([loadToday(), loadRank()]);
+  const after = await rankValue(kind);
+  if (kind === 'visit') toast('已记录 · 拜访不进排行');
+  else if (before !== null && after !== null) toast(`已记录 · ${MLABEL[METRIC[kind]]} ${before} → ${after}`);
+  else toast('已记录');
+  S.sub = null;
+  render();
+  return true;
+}
+
+async function rankValue(kind) {
+  const m = METRIC[kind];
+  if (!m) return null;
+  const r = await api(`/api/rankings?scope=team&metric=${m}&period=day`);
+  if (!r.ok) return null;
+  const row = (r.data.rows || []).find(x => x.isMe);
   return row ? row.value : 0;
 }
 
-function todayAt(h, m, s) {
-  const d = new Date();
-  const p = n => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(h)}:${p(m)}:${p(s)}.000+08:00`;
+async function saveRead() {
+  const ck = document.getElementById('ck');
+  if (!ck || !ck.checked) { toast('请先确认完成今日阅读任务'); return; }
+  await submit('read', { readSeconds: S.readSec, completed: true });
 }
 
-async function refresh() {
-  const today = await api('/api/today');
-  state.today = today.data;
-  if (state.me.team) {
-    const r = await api('/api/rankings?scope=team&metric=early_count&period=day');
-    if (r.ok) state.rank = r.data;
+async function saveRun() {
+  const d = Number(document.getElementById('d').value);
+  const m = Number(document.getElementById('m').value);
+  const s = Number(document.getElementById('s').value);
+  if (!(d > 0) || !(m > 0) || !Number.isInteger(s) || s <= 0) { toast('请填有效的距离、时长、步数'); return; }
+  await submit('run', { distanceKm: d, minutes: m, steps: s, imageRef: 'local:demo', ocrMock: true });
+}
+
+/* ---------------- 弹层 ---------------- */
+const SHEETS = {
+  early: {
+    title: '确认打卡',
+    body: `<p>现在提交会记为「今日早起」，时刻按你点下按钮的时间算。</p>`,
+    ok: '确认打卡',
+    run: () => submit('early', {}, new Date().toISOString()),
+  },
+  visit: {
+    title: '记录一次拜访',
+    body: `<p>只记录"完成一次拜访"的自主申报，不填客户信息。</p><p>每天可记几次待确认，当前限制为 1 次。</p>`,
+    ok: '确认记录',
+    run: () => submit('visit', {}),
+  },
+};
+function openSheet(key) {
+  const s = SHEETS[key];
+  if (!s) return;
+  $('#sheetBody').innerHTML = `<h3>${s.title}</h3>${s.body}
+    <div class="acts"><button class="btn ghost" data-close>取消</button><button class="btn" id="sheetOk">${s.ok}</button></div>`;
+  $('#sheet').classList.add('on');
+  document.querySelectorAll('[data-close]').forEach(el => el.onclick = closeSheet);
+  $('#sheetOk').onclick = async () => { closeSheet(); await s.run(); };
+}
+function closeSheet() { $('#sheet').classList.remove('on'); }
+
+document.addEventListener('change', e => {
+  if (e.target.id === 'photo') {
+    S.photo = e.target.files[0] ? e.target.files[0].name : null;
+    render();
   }
-}
+  if (e.target.id === 'ck') S.readChecked = e.target.checked;
+});
 
-async function exportCsv() {
-  const res = await api('/api/admin/export.csv', { raw: true });
-  if (!res.ok) { alert('导出被拒：' + res.status); return; }
-  const blob = await res.blob();
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'actions.csv';
-  a.click();
-}
-
-function bind() {
-  document.querySelectorAll('[data-act]').forEach(el => {
-    el.onclick = () => submit(el.dataset.act, false);
-  });
-  document.querySelectorAll('[data-sim]').forEach(el => {
-    el.onclick = () => submit(el.dataset.sim, true);
-  });
-  document.querySelectorAll('[data-clear]').forEach(el => {
-    el.onclick = () => { state.event = null; render(); };
-  });
-  document.querySelectorAll('[data-user]').forEach(el => {
-    el.onclick = () => switchTo(el.dataset.user);
-  });
-  document.querySelectorAll('[data-export],[data-export-preview]').forEach(el => {
-    el.onclick = exportCsv;
-  });
-}
+setInterval(() => {
+  const b = beijingNow();
+  $('#clock').textContent = `${String(b.h).padStart(2,'0')}:${String(b.m).padStart(2,'0')}`;
+}, 1000);
 
 boot();
 </script>

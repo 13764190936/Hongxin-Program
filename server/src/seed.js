@@ -113,6 +113,9 @@ try {
     { user: 'u_wen', team: 't_up', kind: 'early', date: yesterday, at: '05:31:10' },
     { user: 'u_gu', team: 't_chen', kind: 'early', date: yesterday, at: '05:31:44' },
     { user: 'u_beta_1', team: 't_beta', kind: 'early', date: today, at: '05:31:02' },
+    // 演示主账号：早起与晨跑已完成，预留给「阅读」「拜访」现场操作
+    { user: 'u_lin', team: 't_up', kind: 'early', date: today, at: '05:31:18' },
+    { user: 'u_lin', team: 't_up', kind: 'run', date: today, at: '06:22:00', metrics: { distanceKm: 3.6, minutes: 24, steps: 4800 } },
   ];
 
   for (const r of seedRecords) {

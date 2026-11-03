@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>鸿心 · 每日行动</title>
+<style>
+:root{
+  --paper:#f4f3ee; --card:#fbfaf6; --ink:#1f3830; --muted:#78877e;
+  --green:#22624b; --line:#e3e6da; --soft:#e9efe2; --warn:#8a5f16; --warnbg:#fbf2df; --red:#9c3a2e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#e7e9e1;color:var(--ink);font:14px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,select{font:inherit}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 90px}
+
+.top{position:sticky;top:0;z-index:20;background:rgba(231,233,225,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1000px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-size:17px;font-weight:600;letter-spacing:2px}
+.brand small{display:block;font-size:9.5px;letter-spacing:2px;color:var(--muted);font-weight:400}
+.spacer{flex:1}
+.who{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.who b{color:var(--ink);font-weight:600}
+.switch{display:flex;background:#dde1d6;border-radius:10px;padding:3px;gap:2px}
+.switch button{font-size:12px;padding:6px 11px;border-radius:8px;color:#5d6b62}
+.switch button.on{background:#fff;color:var(--green);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+
+.hero{padding:34px 0 6px}
+.eyebrow{font-size:10px;letter-spacing:2.4px;color:var(--muted);text-transform:uppercase}
+h1{font-size:31px;line-height:1.25;letter-spacing:-1px;font-weight:600;margin:8px 0 10px}
+.lead{color:var(--muted);font-size:13px;margin:0}
+
+.sec{margin-top:30px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sec h2{font-size:15px;font-weight:600;margin:0}
+.sec .note{font-size:11.5px;color:var(--muted)}
+
+.course{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:12px}
+.course .t{font-size:15px;font-weight:600}
+.course .m{font-size:11.5px;color:var(--muted);margin-top:3px}
+.bar{height:4px;background:#e6e9dd;border-radius:3px;margin-top:14px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green);border-radius:3px;transition:width .5s cubic-bezier(.2,.7,.3,1)}
+
+.tasks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+.task{position:relative;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;transition:.18s;display:flex;flex-direction:column;min-height:154px}
+.task:hover{border-color:#c6d3c4;transform:translateY(-2px)}
+.task:disabled{cursor:default;opacity:.72;transform:none}
+.task .tag{font-size:10px;letter-spacing:.6px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:2px 8px;align-self:flex-start}
+.task.done .tag{color:var(--green);border-color:#cbdccb;background:var(--soft)}
+.task.pending .tag{color:var(--warn);border-color:#e6d3ab;background:var(--warnbg)}
+.task h3{font-size:16px;font-weight:600;margin:12px 0 4px}
+.task p{font-size:11.5px;color:var(--muted);margin:0;line-height:1.55}
+.task .foot{margin-top:auto;padding-top:12px;font-size:11.5px;color:var(--green);display:flex;justify-content:space-between;align-items:center}
+.task:disabled .foot{color:var(--muted)}
+.task .time{font-variant-numeric:tabular-nums;font-size:11px;color:var(--muted)}
+
+.evidence{background:#fff;border:1px solid #cfdcc9;border-radius:16px;padding:18px 20px;margin-top:14px;animation:rise .28s ease}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.evidence.reject{border-color:#e6c9c2;background:#fdf6f4}
+.evidence h3{font-size:14px;font-weight:600;margin:0 0 12px}
+.evidence ol{margin:0;padding-left:0;list-style:none;display:grid;gap:9px}
+.evidence li{display:flex;gap:9px;font-size:12.5px;line-height:1.6}
+.evidence .n{flex:0 0 18px;height:18px;border-radius:50%;background:var(--soft);color:var(--green);font-size:10.5px;display:grid;place-items:center;font-weight:600;margin-top:2px}
+.evidence.reject .n{background:#f3e0db;color:var(--red)}
+.evidence code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;background:#f3f5ee;border-radius:5px;padding:1px 5px}
+.evidence .delta{color:var(--green);font-weight:600;font-variant-numeric:tabular-nums}
+.evidence .act{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.btn-s{font-size:12px;padding:7px 12px;border-radius:9px;background:var(--green);color:#fff}
+.btn-s.ghost{background:#fff;color:var(--green);border:1px solid #cbd9cb}
+.btn-s.plane{background:#fff;color:var(--ink);border:1px solid var(--line)}
+
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #eef0e8}
+th{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.4px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.rank-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eef0e8}
+.rank-row:last-child{border-bottom:0}
+.rank-row .pos{width:22px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.rank-row .pos.top{color:var(--green);font-weight:600}
+.rank-row .nm{flex:1;font-size:13px}
+.rank-row .nm small{color:var(--muted);font-size:11px;margin-left:6px}
+.rank-row .val{font-variant-numeric:tabular-nums;font-weight:600}
+.rank-row.me{background:#f0f4ea;border-radius:9px;padding-left:8px;padding-right:8px}
+.up{color:var(--green);font-size:11px;margin-left:6px;animation:fade .6s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.kpi div{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px}
+.kpi b{display:block;font-size:23px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.25}
+.kpi span{font-size:11px;color:var(--muted)}
+.empty{color:var(--muted);font-size:12.5px;padding:16px 0}
+.hint{font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.7}
+.pill{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:20px;background:var(--soft);color:var(--green)}
+.pill.warn{background:var(--warnbg);color:var(--warn)}
+.pill.grey{background:#eef0e8;color:var(--muted)}
+@media(max-width:620px){
+  .wrap{padding:0 14px 80px}.top-in{padding:12px 14px}
+  h1{font-size:25px}.tasks{grid-template-columns:1fr 1fr}
+  .kpi{grid-template-columns:1fr 1fr}
+  .task{min-height:140px;padding:14px}
+  .task h3{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="top-in">
+    <div class="brand">鸿心<small>GROW THROUGH ACTION</small></div>
+    <div class="spacer"></div>
+    <div class="who">当前身份 <b id="whoName">—</b><span id="whoMeta"></span></div>
+    <div class="switch" id="switch"></div>
+  </div>
+</div>
+
+<div class="wrap" id="app"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const kindLabel = { early:'5:31 早起', run:'晨跑', read:'阅读', visit:'拜访' };
+const metricOf = { early:'early_count', run:'run_km', read:'read_minutes' };
+const metricLabel = { early_count:'早起次数', run_km:'晨跑公里', read_minutes:'阅读分钟' };
+const statusPill = s => s === 'valid'
+  ? '<span class="pill">有效</span>'
+  : s === 'pending_review' ? '<span class="pill warn">待核</span>' : '<span class="pill grey">—</span>';
+
+const state = { users:[], me:null, today:null, rank:null, adminRows:null, event:null, busy:false };
+
+async function api(path, { method='GET', body, raw } = {}) {
+  const res = await fetch(path, {
+    method,
+    headers: { 'content-type':'application/json', 'x-test-user': state.me.id },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  if (raw) return res;
+  const text = await res.text();
+  let data; try { data = JSON.parse(text); } catch { data = text; }
+  return { ok: res.ok, status: res.status, data };
+}
+
+async function boot() {
+  const meta = await (await fetch('/api/meta')).json();
+  state.users = meta.users.filter(u => u.enterpriseId === 'ent-alpha');
+  const pick = state.users.find(u => u.id === 'u_lin') || state.users[0];
+  await switchTo(pick.id);
+}
+
+async function switchTo(id) {
+  state.me = state.users.find(u => u.id === id);
+  state.event = null;
+  const [me, today] = await Promise.all([api('/api/me'), api('/api/today')]);
+  state.me = { ...state.me, ...me.data };
+  state.today = today.data;
+  state.rank = state.me.team
+    ? (await api('/api/rankings?scope=team&metric=early_count&period=day')).data
+    : null;
+  state.adminRows = state.me.role === 'admin'
+    ? (await api('/api/admin/records?limit=50')).data.rows
+    : null;
+  render();
+}
+
+function render() {
+  $('#whoName').textContent = state.me.name;
+  $('#whoMeta').textContent = state.me.role === 'admin'
+    ? '主管 · 星禾企业'
+    : `员工 · ${state.me.team ? state.me.team.name : '未加入团队'}`;
+  $('#switch').innerHTML = state.users.map(u =>
+    `<button data-user="${u.id}" class="${u.id === state.me.id ? 'on' : ''}">${u.role === 'admin' ? '主管 ' : ''}${esc(u.name)}</button>`
+  ).join('');
+  $('#app').innerHTML = state.me.role === 'admin' ? adminView() : employeeView();
+  bind();
+}
+
+/* ---------------- 员工视图 ---------------- */
+function employeeView() {
+  const t = state.today;
+  const done = t.tasks.filter(x => x.done).length;
+  return `
+  <div class="hero">
+    <div class="eyebrow">DAILY PRACTICE / 每日行动</div>
+    <h1>${esc(state.me.name)}，今天走完 ${done} / 4 步。</h1>
+    <p class="lead">${state.me.team ? `在「${esc(state.me.team.name)}」里和伙伴一起。` : '还没有加入团队。'}所有操作都会写进数据库，换个人能看到。</p>
+  </div>
+
+  <div class="course">
+    <div class="t">卓越成长 · 21天行动营</div>
+    <div class="m">第 08 天 / 21 天 · 今日行动 ${done} / 4</div>
+    <div class="bar"><i style="width:${done / 4 * 100}%"></i></div>
+  </div>
+
+  <div class="sec"><h2>今天的行动</h2><span class="note">点一下就写库，不是演示动画</span></div>
+  <div class="tasks">${t.tasks.map(taskCard).join('')}</div>
+
+  ${state.event ? evidenceCard(state.event) : ''}
+
+  <div class="sec"><h2>小组榜 · 早起次数（今天）</h2><span class="note">${state.rank && state.rank.team ? esc(state.rank.team) : '未加入团队'}</span></div>
+  <div class="course" style="padding:12px 18px">${rankList()}</div>
+
+  <p class="hint">接着试：点上面任意一个「去完成」→ 看下面的证据；再切到顶部「主管 张敏」→ 同一条记录会出现在她的列表里。</p>`;
+}
+
+function taskCard(t) {
+  const rec = t.records[0];
+  const cls = rec ? (rec.status === 'valid' ? 'done' : 'pending') : '';
+  const time = rec ? rec.clientClaimedBj.slice(11, 16) : '';
+  const label = rec ? (rec.status === 'valid' ? '有效' : '待核') : ({ early:'指定时间', run:'图片记录', read:'团队任务', visit:'自主申报' }[t.kind]);
+  return `<button class="task ${cls}" data-act="${t.kind}" ${state.busy ? 'disabled' : ''}>
+    <span class="tag">${label}</span>
+    <h3>${kindLabel[t.kind]}</h3>
+    <p>${({ early:'北京时间 05:31 的整分钟', run:'上传运动截图并确认数据', read:'记录阅读时长并确认完成', visit:'完成后一键记录' })[t.kind]}</p>
+    <span class="foot"><span>${rec ? '已完成' : '去完成'}</span><span class="time">${time}</span></span>
+  </button>`;
+}
+
+function rankList() {
+  const r = state.rank;
+  if (!r) return '<div class="empty">尚未加入团队，暂无小组排名。</div>';
+  if (!r.rows.length) return `<div class="empty">${esc(r.note || '暂无数据')}</div>`;
+  return r.rows.map(x => `<div class="rank-row ${x.isMe ? 'me' : ''}">
+    <span class="pos ${x.rank <= 3 ? 'top' : ''}">${String(x.rank).padStart(2, '0')}</span>
+    <span class="nm">${esc(x.name)}${x.isMe ? '<small>我</small>' : ''}</span>
+    <span class="val">${x.value}</span>
+    ${state.event && state.event.rankUserId === x.id ? '<span class="up">+1</span>' : ''}
+  </div>`).join('');
+}
+
+function evidenceCard(e) {
+  if (e.rejected) {
+    return `<div class="evidence reject">
+      <h3>服务端拒绝了这次提交</h3>
+      <ol>
+        <li><span class="n">1</span><div>请求已到达服务端，被规则挡下：<code>${esc(e.code)}</code></div></li>
+        <li><span class="n">2</span><div>${esc(e.message)}</div></li>
+        <li><span class="n">3</span><div>数据库里<b>没有</b>新增记录 —— 拒收不落库，所以榜单不会变。</div></li>
+      </ol>
+      <div class="act">
+        <button class="btn-s" data-sim="early">用 05:31 的情景再试一次</button>
+        <button class="btn-s plane" data-clear>知道了</button>
+      </div>
+    </div>`;
+  }
+  const r = e.record;
+  const rankText = e.rankBefore === null ? null : `${e.rankBefore} → ${e.rankAfter}`;
+  return `<div class="evidence">
+    <h3>刚才真的发生了这些</h3>
+    <ol>
+      <li><span class="n">1</span><div>写入一条记录 <code>${r.id.slice(0, 8)}</code>，项目「${kindLabel[r.kind]}」，状态 ${statusPill(r.status)}${r.reviewReason ? `（原因：${esc(r.reviewReason)}）` : ''}</div></li>
+      <li><span class="n">2</span><div>客户端时刻 <code>${r.clientClaimedBj}</code>，服务端接收 <code>${r.serverReceivedBj}</code></div></li>
+      <li><span class="n">3</span><div>${rankText === null
+        ? '这个项目不进排行（拜访不可验证，刻意不参与竞争）。'
+        : `小组榜「${esc(state.rank ? state.rank.team : '')}」${metricLabel[metricOf[r.kind]]}：<span class="delta">${rankText}</span>`}</div></li>
+      <li><span class="n">4</span><div>主管张敏的「全企业记录」里现在能查到这一条。<button class="btn-s ghost" data-user="u_alpha_admin" style="margin-left:6px">切过去看</button></div></li>
+      <li><span class="n">5</span><div>导出 CSV 会包含这一行。<button class="btn-s ghost" data-export-preview style="margin-left:6px">下载看看</button></div></li>
+    </ol>
+    <div class="act"><button class="btn-s plane" data-clear>收起</button></div>
+  </div>`;
+}
+
+/* ---------------- 主管视图 ---------------- */
+function adminView() {
+  const rows = state.adminRows || [];
+  const today = state.today ? state.today.bizDate : '';
+  const valid = rows.filter(r => r.status === 'valid').length;
+  const pending = rows.filter(r => r.status === 'pending_review').length;
+  const people = new Set(rows.map(r => r.userName)).size;
+  return `
+  <div class="hero">
+    <div class="eyebrow">WHAT THE MANAGER SEES</div>
+    <h1>${esc(state.me.name)}看到的，就是员工刚交的。</h1>
+    <p class="lead">这是同一个数据库、同一个接口。员工端提交一条，这里立刻多一行。</p>
+  </div>
+
+  <div class="kpi">
+    <div><b>${rows.length}</b><span>记录条数（近 50 条）</span></div>
+    <div><b>${valid}</b><span>有效</span></div>
+    <div><b>${pending}</b><span>待核</span></div>
+    <div><b>${people}</b><span>涉及人数</span></div>
+  </div>
+
+  <div class="sec"><h2>行动记录</h2><span class="note">只有本企业数据；导出会留痕</span></div>
+  <div class="course" style="padding:8px 18px 14px">
+    ${rows.length ? `<table>
+      <thead><tr><th>时间（北京）</th><th>姓名</th><th>团队</th><th>项目</th><th>状态</th><th class="num">指标</th></tr></thead>
+      <tbody>${rows.map(r => `<tr>
+        <td style="font-variant-numeric:tabular-nums;font-size:11.5px">${r.clientClaimedBj}</td>
+        <td>${esc(r.userName)}</td>
+        <td style="color:var(--muted);font-size:11.5px">${esc(r.teamName || '—')}</td>
+        <td>${kindLabel[r.kind]}</td>
+        <td>${statusPill(r.status)}</td>
+        <td class="num" style="font-size:11.5px">${metricText(r)}</td>
+      </tr>`).join('')}</tbody>
+    </table>` : '<div class="empty">暂无记录</div>'}
+    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn-s" data-export>导出 CSV（${rows.length} 行）</button>
+      <button class="btn-s plane" data-user="u_lin">切回员工去看</button>
+    </div>
+  </div>
+
+  <p class="hint">主管看不到其他企业的数据：接口在数据层强制带企业条件，不是靠前端隐藏菜单。</p>`;
+}
+
+function metricText(r) {
+  const m = r.metrics || {};
+  if (m.distanceKm) return `${m.distanceKm} 公里`;
+  if (m.readSeconds) return `${Math.round(m.readSeconds / 60)} 分钟`;
+  if (m.selfDeclared) return '1 次';
+  return '1 次';
+}
+
+/* ---------------- 交互 ---------------- */
+async function submit(kind, fromSim) {
+  if (state.busy) return;
+  state.busy = true; render();
+  const metric = metricOf[kind];
+
+  let before = null;
+  if (metric && state.me.team) {
+    const r = await api(`/api/rankings?scope=team&metric=${metric}&period=day`);
+    if (r.ok) before = findMine(r.data);
+  }
+
+  const claimedAt = (kind === 'early' && fromSim)
+    ? todayAt(5, 31, 20)
+    : new Date().toISOString();
+
+  const payload = { kind, idempotencyKey: 'demo-' + kind + '-' + Date.now(), claimedAt };
+  if (kind === 'run') payload.payload = { distanceKm: 3.2, minutes: 26, steps: 4280, imageRef: 'local:demo', ocrMock: true };
+  if (kind === 'read') payload.payload = { readSeconds: 900, completed: true };
+  if (kind === 'visit') payload.payload = {};
+
+  const res = await api('/api/actions', { method: 'POST', body: payload });
+
+  if (!res.ok) {
+    state.event = { rejected: true, code: res.data.error.code, message: res.data.error.message };
+    state.busy = false; render(); return;
+  }
+
+  let after = before;
+  if (metric && state.me.team) {
+    const r2 = await api(`/api/rankings?scope=team&metric=${metric}&period=day`);
+    if (r2.ok) after = findMine(r2.data);
+  }
+
+  state.event = {
+    record: res.data.record,
+    rankBefore: before,
+    rankAfter: after,
+    rankUserId: state.me.id,
+    idempotent: res.data.idempotent,
+  };
+  await refresh();
+  state.busy = false;
+  render();
+}
+
+function findMine(data) {
+  const row = (data.rows || []).find(x => x.isMe);
+  return row ? row.value : 0;
+}
+
+function todayAt(h, m, s) {
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(h)}:${p(m)}:${p(s)}.000+08:00`;
+}
+
+async function refresh() {
+  const today = await api('/api/today');
+  state.today = today.data;
+  if (state.me.team) {
+    const r = await api('/api/rankings?scope=team&metric=early_count&period=day');
+    if (r.ok) state.rank = r.data;
+  }
+}
+
+async function exportCsv() {
+  const res = await api('/api/admin/export.csv', { raw: true });
+  if (!res.ok) { alert('导出被拒：' + res.status); return; }
+  const blob = await res.blob();
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'actions.csv';
+  a.click();
+}
+
+function bind() {
+  document.querySelectorAll('[data-act]').forEach(el => {
+    el.onclick = () => submit(el.dataset.act, false);
+  });
+  document.querySelectorAll('[data-sim]').forEach(el => {
+    el.onclick = () => submit(el.dataset.sim, true);
+  });
+  document.querySelectorAll('[data-clear]').forEach(el => {
+    el.onclick = () => { state.event = null; render(); };
+  });
+  document.querySelectorAll('[data-user]').forEach(el => {
+    el.onclick = () => switchTo(el.dataset.user);
+  });
+  document.querySelectorAll('[data-export],[data-export-preview]').forEach(el => {
+    el.onclick = exportCsv;
+  });
+}
+
+boot();
+</script>
+</body>
+</html>
