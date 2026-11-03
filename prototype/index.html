@@ -606,8 +606,8 @@ function renderHome(){
   <div class="hstats"><div class="st"><div class="v">412</div><div class="l">今日参与人数</div></div><div class="st"><div class="v">3,286</div><div class="l">今日里程 / 公里</div></div></div>
   <div class="sec"><h3>队伍排行</h3><span class="muted" style="font-size:11px">模拟榜单</span></div>
   <div class="seg">${[['b01','总步数'],['b02','总人数'],['b03','平均步数']].map(([id,label])=>`<button class="s ${tab===id?'on':''}" style="border:0" data-home-tab="${id}">${label}</button>`).join('')}</div>
-  <div class="scope-summary">${tab==='b03'?'人均步数，保留四位小数':'队伍排名'} · 统计周期待业务确认</div>
-  <div class="card tight">${listState(()=>sorted.map((t,i)=>`<div class="row" data-go="teamDetail" data-p='{"teamId":"${t.id}"}'><span class="rk">${i+1}</span><div class="rname">${esc(t.name)}<div class="rsub">${t.members}人</div></div><div class="rval">${tab==='b02'?`${t.members}<small>人</small>`:tab==='b03'?`${t.members?(t.steps/t.members).toFixed(4):'—'}<small>平均步数</small>`:`${num(t.steps)}<small>步</small>`}</div></div>`).join(''))}</div>
+  <div class="scope-summary">${{b01:'队伍总步数排名',b02:'队伍总人数排名（零步队伍也出现）',b03:'队伍人均步数 = 队伍步数 ÷ 人数，保留四位小数'}[tab]} · 范围与统计周期待业务确认</div>
+  <div class="card tight">${listState(()=>sorted.map((t,i)=>`<div class="row" data-go="teamDetail" data-p='{"teamId":"${t.id}"}'><span class="rk ${i<3?'m'+(i+1):''}">${i+1}</span><div class="rname">${esc(t.name)}<div class="rsub">${tab==='b02'?`${num(t.steps)}步`:`${t.members}人`}</div></div><div class="rval">${tab==='b02'?`${t.members}<small>人</small>`:tab==='b03'?`${t.members?(t.steps/t.members).toFixed(4):'—'}<small>平均步数</small>`:`${num(t.steps)}<small>步</small>`}</div></div>`).join(''))}</div>
   ${COURSES.map((g,gi)=>`<div class="sec"><h3>${g.col}</h3><button class="btn ghost sm" data-go="courseList" data-p='{"group":${gi}}'>更多</button></div><div class="card tight">${g.items.slice(0,2).map(c=>`<div class="course" data-go="classroom" data-p='{"courseId":"${c.id}"}'><div class="cv" style="background:${c.color}">课程</div><div class="ci"><div class="ct">${esc(c.t)}</div><div class="cm">${c.time} · ${num(c.listeners)}人已听</div></div></div>`).join('')}</div>`).join('')}`;
 }
 
@@ -1438,8 +1438,8 @@ const SCREENS = {
 };
 
 const GUIDE = [
-  ['导航', [['home','首页'],['walk','徒步活动'],['teams','队伍列表'],['teamCreate','发起队伍'],['teamDetail','队伍详情'],['reading','共读首页'],['bookDetail','共读详情'],['checkin','打卡表单预览'],['readingMine','我报名的共读']]],
-  ['内容', [['classroom','在线课堂'],['notePublishStudy','发布学习笔记'],['feed','动态'],['notes','笔记广场'],['notePublish','发布笔记']]],
+  ['导航', [['home','首页'],['walk','徒步活动'],['teams','队伍列表'],['teamCreate','发起队伍'],['teamDetail','队伍详情'],['reading','共读首页'],['bookDetail','共读详情'],['readingContent','共读内容预览'],['checkin','打卡表单预览'],['readingMine','我报名的共读']]],
+  ['内容', [['classroom','在线课堂'],['courseList','栏目全部课程'],['courseContent','课程学习内容'],['notePublishStudy','发布学习笔记'],['feed','动态'],['notes','笔记广场'],['notePublish','发布笔记']]],
   ['个人', [['mine','我的'],['myStudy','我的学习'],['myWalk','我的徒步'],['myRank','我的排行'],['myTeams','我的队伍'],['profile','个人资料'],['authSettings','授权设置'],['messages','留言板']]]
 ];
 
