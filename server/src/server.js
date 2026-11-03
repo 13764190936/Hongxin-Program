@@ -8,13 +8,14 @@ import { handle } from './api.js';
 import { getDb, dbPath } from './db.js';
 
 const ROOT = fileURLToPath(new URL('../public', import.meta.url));
+const HERE = fileURLToPath(new URL('.', import.meta.url));
 const PORT = Number(process.env.PORT || 8787);
 
 // 首次启动时数据库不存在，自动写入虚构数据，避免打开就是空页面
-const DB_FILE = process.env.HX_DB || join(process.cwd(), 'data/hongxin.db');
+const DB_FILE = process.env.HX_DB || join(HERE, '../data/hongxin.db');
 if (!existsSync(DB_FILE)) {
   console.log('未发现数据库，正在写入虚构测试数据…\n');
-  execFileSync(process.execPath, [join(process.cwd(), 'src/seed.js')], { stdio: 'inherit' });
+  execFileSync(process.execPath, [join(HERE, 'seed.js')], { stdio: 'inherit' });
 }
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -56,9 +57,9 @@ server.on('error', (e) => {
   }
   throw e;
 });
-server.listen(PORT, '127.0.0.1', () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log('');
-  console.log('  鸿心课程行动 · 已启动');
+  console.log(`  鸿心课程行动 · 已启动（端口 ${PORT}）`);
   console.log(`  员工端   http://127.0.0.1:${PORT}/`);
   console.log(`  主管视角 http://127.0.0.1:${PORT}/showcase`);
   console.log(`  技术台   http://127.0.0.1:${PORT}/debug`);

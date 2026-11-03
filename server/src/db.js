@@ -6,8 +6,11 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const DB_PATH = process.env.HX_DB || resolve(process.cwd(), 'data/hongxin.db');
+// 用模块相对路径而不是 process.cwd()，避免部署环境工作目录不同导致找不到库文件
+const HERE = dirname(fileURLToPath(import.meta.url));
+const DB_PATH = process.env.HX_DB || resolve(HERE, '../data/hongxin.db');
 
 const SCHEMA = `
 PRAGMA journal_mode = WAL;

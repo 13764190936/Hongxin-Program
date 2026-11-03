@@ -139,6 +139,18 @@ h1{font-size:25px;line-height:1.28;letter-spacing:-.6px;font-weight:600;margin:6
 </div>
 
 <script>
+
+// 部署后站点带 ?sharecode=…，页面内的接口请求必须一起带上，否则被网关拦成「链接不完整」
+(() => {
+  const raw = window.fetch.bind(window);
+  window.fetch = (u, o) => {
+    if (typeof u === 'string' && u.startsWith('/')) {
+      const q = location.search.replace(/^\?/, '');
+      if (q) u += (u.includes('?') ? '&' : '?') + q;
+    }
+    return raw(u, o);
+  };
+})();
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LABEL = { early:'5:31 早起', run:'晨跑', read:'阅读', visit:'拜访' };
