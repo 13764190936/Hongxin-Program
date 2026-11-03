@@ -17,8 +17,9 @@ const MIME = {
 
 async function serveStatic(req, res) {
   const url = new URL(req.url, 'http://localhost');
-  const rel = url.pathname === '/' ? '/index.html' : url.pathname;
-  const file = join(ROOT, normalize(rel).replace(/^(\.\.[/\\])+/, ''));
+  const pathname = url.pathname === '/' ? '/index.html' : url.pathname;
+  const alias = { '/debug': '/debug.html' }[pathname] || pathname;
+  const file = join(ROOT, normalize(alias).replace(/^(\.\.[/\\])+/, ''));
   try {
     const buf = await readFile(file);
     res.writeHead(200, {

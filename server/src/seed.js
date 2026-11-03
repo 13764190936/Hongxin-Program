@@ -51,7 +51,7 @@ const TEAMS = [
 ];
 
 const MEMBERS = [
-  ['t_up', 'u_zhou'], ['t_up', 'u_wen'],
+  ['t_up', 'u_zhou'], ['t_up', 'u_wen'], ['t_up', 'u_lin'],
   ['t_zhi', 'u_chen'], ['t_zhi', 'u_he'],
   ['t_chen', 'u_gu'],
   ['t_beta', 'u_beta_1'], ['t_beta', 'u_beta_2'],
