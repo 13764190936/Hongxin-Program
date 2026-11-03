@@ -2,6 +2,16 @@
 
 本仓库用于产品设计与WorkBuddy开发协作。当前阶段：流程原型v0.2已修订并完成浏览器基本走查；尚无可运行小程序、后端、数据库或上线环境。
 
+## 最新课程行动方向（先读）
+
+负责人已将主线调整为“课程关联每日行动打卡、多企业员工、后台统计”。
+
+- [最新需求与后端接手说明](docs/ACTION-BACKEND-HANDOFF.md)
+- [最新前端预览](frontend/action-preview/index.html)：今天、课程、排行、团队、我的；含创建/加入团队UI。下载后用浏览器打开。
+- [前端运行与模拟边界](frontend/action-preview/README.md)
+
+旧`prototype/index.html`保留历史，不能直接当作新版前端。所有新前端数据为模拟，后端尚未接入；现有工作进展请以DEVLOG最新编号为准。
+
 ## 从这里开始
 
 1. [WorkBuddy接手说明](WORKBUDDY.md)

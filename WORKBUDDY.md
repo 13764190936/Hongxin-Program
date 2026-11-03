@@ -1,6 +1,6 @@
 # WorkBuddy接手说明
 
-请先完整阅读docs/PRD.md和docs/FEATURE_INVENTORY.md。
+请先完整阅读docs/ACTION-BACKEND-HANDOFF.md及frontend/action-preview/README.md，这是负责人最新确认的产品方向。随后阅读历史docs/PRD.md和docs/FEATURE_INVENTORY.md作为旧版调研参考，不逐项复刻历史导航或将旧待决状态覆盖最新明确结论。
 
 ## 第一批交付
 
