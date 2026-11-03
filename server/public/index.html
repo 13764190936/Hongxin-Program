@@ -299,22 +299,25 @@ function viewToday() {
   <p class="note">所有数据来自本地数据库，不是页面里的假数字。切到「我的」可以换身份看同一个团队其他人的视角。</p>`;
 }
 
+function subHead(title, desc) {
+  return `<div class="sub-head"><button class="back" data-back>‹</button><div><div class="tt">${title}</div><div style="font-size:10.5px;color:var(--muted)">${desc}</div></div></div>`;
+}
+
 function subView() {
   const t = S.today ? S.today.tasks.find(x => x.kind === S.sub) : null;
   const rec = t && t.records[0];
-  const head = (title, desc) => `<div class="sub-head"><button class="back" data-back>‹</button><div><div class="tt">${title}</div><div style="font-size:10.5px;color:var(--muted)">${desc}</div></div></div>`;
   if (S.sub === 'early') return earlyView(rec);
   if (S.sub === 'run') return runView(rec);
   if (S.sub === 'read') return readView(rec);
   if (S.sub === 'visit') return visitView(rec);
-  return head('行动', '');
+  return subHead('行动', '');
 }
 
 function earlyView(rec) {
   const n = beijingNow();
   const inWin = n.h === 5 && n.m === 31;
   const status = rec ? `已记录 ${rec.clientClaimedBj.slice(11,19)}` : inWin ? '窗口已开启' : `现在 ${String(n.h).padStart(2,'0')}:${String(n.m).padStart(2,'0')}，不在窗口`;
-  return `${head('5:31 早起','EARLY START')}
+  return `${subHead('5:31 早起','EARLY START')}
   <div class="card">
     <span class="pill ${rec ? '' : inWin ? '' : 'grey'}">${status}</span>
     <div class="time">${String(n.h).padStart(2,'0')}:${String(n.m).padStart(2,'0')}<span style="font-size:20px;color:var(--muted)">:${String(n.s).padStart(2,'0')}</span></div>
@@ -331,7 +334,7 @@ function earlyView(rec) {
 function runView(rec) {
   if (rec) {
     const m = rec.metrics || {};
-    return `${head('晨跑','MORNING RUN')}
+    return `${subHead('晨跑','MORNING RUN')}
     <div class="card">
       <span class="pill ${rec.status === 'valid' ? '' : 'warn'}">${rec.status === 'valid' ? '有效' : '待核'}</span>
       <div style="display:flex;gap:18px;margin-top:14px">
@@ -342,7 +345,7 @@ function runView(rec) {
       <p class="note">记录号 ${rec.id.slice(0,8)} · ${rec.clientClaimedBj}</p>
     </div>`;
   }
-  return `${head('晨跑','MORNING RUN')}
+  return `${subHead('晨跑','MORNING RUN')}
   <div class="card">
     <div class="eyebrow">01 / 运动截图</div>
     <label style="display:block;margin-top:12px;border:1px dashed #d3dccc;border-radius:14px;padding:26px;text-align:center;color:var(--muted);font-size:12px">
@@ -361,7 +364,7 @@ function runView(rec) {
 function readView(rec) {
   if (rec) {
     const m = rec.metrics || {};
-    return `${head('阅读','READ & REFLECT')}
+    return `${subHead('阅读','READ & REFLECT')}
     <div class="card">
       <span class="pill ${rec.status === 'valid' ? '' : 'warn'}">${rec.status === 'valid' ? '已完成' : '待核'}</span>
       <div style="display:flex;gap:18px;margin-top:14px">
@@ -373,7 +376,7 @@ function readView(rec) {
   }
   const mm = String(Math.floor(S.readSec/60)).padStart(2,'0');
   const ss = String(S.readSec%60).padStart(2,'0');
-  return `${head('阅读','READ & REFLECT')}
+  return `${subHead('阅读','READ & REFLECT')}
   <div class="card">
     <div class="eyebrow">今日指定阅读</div>
     <div style="font-size:14px;font-weight:600;margin:8px 0 4px">知与行，从身边的一件事开始</div>
@@ -398,10 +401,10 @@ function readView(rec) {
 }
 
 function visitView(rec) {
-  if (rec) return `${head('拜访','MEET & CONNECT')}
+  if (rec) return `${subHead('拜访','MEET & CONNECT')}
   <div class="card"><span class="pill">已记录</span>
   <p class="note">今天已完成一次拜访 · ${rec.clientClaimedBj.slice(11,16)} · 记录号 ${rec.id.slice(0,8)}</p></div>`;
-  return `${head('拜访','MEET & CONNECT')}
+  return `${subHead('拜访','MEET & CONNECT')}
   <div class="card" style="text-align:center;padding:30px 16px">
     <div style="font-size:40px;color:#96a78b;line-height:1">⌁</div>
     <div style="font-size:15px;font-weight:600;margin-top:8px">完成一次拜访，记录一次行动。</div>
