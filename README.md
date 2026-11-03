@@ -5,10 +5,13 @@
 ## 从这里开始
 
 1. [WorkBuddy接手说明](WORKBUDDY.md)
-2. [产品需求与开发交接文档](docs/PRD.md)
-3. [逐项功能与排行榜清单](docs/FEATURE_INVENTORY.md)
-4. [待确认决策](docs/DECISIONS.md)
-5. [开发任务](docs/BACKLOG.md)
+2. [开发日志](docs/DEVLOG.md) ← **想知道"改了什么、改到哪一步"，只看这个**
+3. [产品需求与开发交接文档](docs/PRD.md)
+4. [逐项功能与排行榜清单](docs/FEATURE_INVENTORY.md)
+5. [待确认决策](docs/DECISIONS.md)
+6. [第一轮交付：需求核对与技术方案](docs/DELIVERY-01.md)
+7. [开发任务](docs/TASKS.md)
+8. [页面原型](prototype/index.html)（下载后用浏览器打开）
 
 负责人负责业务决策；产品与交互设计在文档中沉淀；WorkBuddy负责技术方案、代码实现和验证。现状、建议和待确认规则必须区分。
 
