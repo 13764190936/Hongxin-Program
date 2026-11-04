@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>鸿心运动打卡 · 本地演示（DEMO）</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>鸿心运动打卡</h1>
+      <span class="badge badge-demo">DEMO 演示</span>
+      <span class="badge badge-mock">MOCK 识别</span>
+    </div>
+    <div class="day-box">
+      <span class="day-label">演示日期（Asia/Shanghai）</span>
+      <strong id="current-day">--</strong>
+    </div>
+    <label class="identity-picker">
+      <span>演示身份</span>
+      <select id="identity-select" aria-label="切换演示身份"></select>
+    </label>
+  </header>
+
+  <section class="disclaimer" aria-label="演示说明">
+    <strong>一次性演示，不是生产系统：</strong>
+    虚构公司/身份，无登录、无用户数据库；步数为模拟微信快照；跑步截图仅做上传、字节校验和 SHA256 去重，识别结果全部为 MOCK，不做真实 OCR，也不接入微信。数据只存进程内存，重启服务会重置数据和演示日期。
+  </section>
+
+  <div id="error-banner" class="banner banner-error" hidden role="alert">
+    <div>
+      <strong id="error-title">操作失败</strong>
+      <p id="error-message"></p>
+    </div>
+    <button type="button" class="btn btn-ghost" id="error-close">关闭</button>
+  </div>
+  <div id="notice-banner" class="banner banner-ok" hidden role="status">
+    <strong id="notice-text"></strong>
+    <button type="button" class="btn btn-ghost" id="notice-close">关闭</button>
+  </div>
+
+  <main class="layout">
+    <section class="card" id="profile-card">
+      <div class="card-head">
+        <h2>我的今日状态</h2>
+        <span class="hint" id="profile-day">--</span>
+      </div>
+      <div class="profile-line">
+        <span class="avatar" id="profile-avatar">--</span>
+        <div>
+          <strong id="profile-name">加载中…</strong>
+          <div class="muted" id="profile-team">--</div>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat">
+          <span class="stat-label">今日步数</span>
+          <strong id="stat-today-steps">--</strong>
+          <span class="stat-note">模拟快照</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">历史总步数</span>
+          <strong id="stat-total-steps">--</strong>
+          <span class="stat-note">仅个人资料，不参与排名</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">今日跑步</span>
+          <strong id="stat-run">--</strong>
+          <span class="stat-note" id="stat-run-note">每天限一次</span>
+        </div>
+      </div>
+      <p class="source-line" id="profile-source">数据源：--</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>同步模拟步数</h2>
+        <span class="badge badge-mock">模拟微信</span>
+      </div>
+      <p class="hint">
+        提交的是<strong>当日绝对累计值</strong>（例如先 6000、再 8000，结果就是 8000，不是 14000）。
+        这不是真实微信同步，也不会读取手机数据。
+      </p>
+      <label class="field">
+        <span>今日绝对步数</span>
+        <input id="steps-input" type="number" min="0" step="1" inputmode="numeric" placeholder="例如 8000" />
+      </label>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="steps-submit">同步模拟步数</button>
+        <span class="hint" id="steps-status">仅当前演示身份、当前服务端日期</span>
+      </div>
+    </section>
+
+    <section class="card card-wide">
+      <div class="card-head">
+        <h2>跑步打卡</h2>
+        <span class="badge badge-mock">识别为 MOCK</span>
+      </div>
+      <p class="hint">
+        必须上传本地截图文件；服务端校验真实 PNG/JPEG 文件头、解码后 ≤ 2MB，并对图片字节做 SHA256 去重（演示中跨人、跨天全局比对）。
+        距离和时长是<strong>模拟识别结果</strong>，由你填写；仅做数字校验，图片本身不能证明真实跑步。每人每天限一次。
+      </p>
+      <div class="run-grid">
+        <div>
+          <label class="field">
+            <span>本地截图（PNG / JPEG）</span>
+            <input id="run-file" type="file" accept="image/png,image/jpeg" />
+          </label>
+          <div class="preview-wrap" id="preview-wrap" hidden>
+            <img id="run-preview" alt="待上传截图预览" />
+            <span class="hint" id="file-meta"></span>
+          </div>
+          <div class="field-row">
+            <label class="field">
+              <span>模拟距离（公里）</span>
+              <input id="run-distance" type="number" min="0.01" step="0.01" placeholder="例如 5.0" />
+            </label>
+            <label class="field">
+              <span>模拟时长（分钟）</span>
+              <input id="run-minutes" type="number" min="1" step="1" placeholder="例如 30" />
+            </label>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="run-submit">提交跑步打卡</button>
+            <span class="hint" id="run-status">等待上传</span>
+          </div>
+        </div>
+        <div class="result-panel" id="run-result" hidden>
+          <h3 id="run-result-title">打卡结果</h3>
+          <ul id="run-result-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card-wide">
+      <div class="card-head">
+        <h2>每日排行榜</h2>
+        <div class="controls">
+          <div class="segmented" role="group" aria-label="选择指标">
+            <button type="button" class="seg active" data-metric="steps">步数</button>
+            <button type="button" class="seg" data-metric="run">跑步距离</button>
+          </div>
+          <div class="segmented" role="group" aria-label="选择范围">
+            <button type="button" class="seg active" data-scope="personal">个人</button>
+            <button type="button" class="seg" data-scope="team">团队</button>
+          </div>
+          <button type="button" class="btn" id="board-refresh">刷新</button>
+        </div>
+      </div>
+      <p class="hint" id="board-meta">--</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-rank">名次</th>
+              <th id="board-name-head">姓名</th>
+              <th class="col-value">数值</th>
+              <th id="board-extra-head">团队</th>
+            </tr>
+          </thead>
+          <tbody id="board-body">
+            <tr><td colspan="4" class="empty">加载中…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint" id="board-tie"></p>
+    </section>
+  </main>
+
+  <div id="confirm-panel" class="confirm-panel" hidden role="group" aria-labelledby="confirm-text">
+    <p id="confirm-text"></p>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" id="confirm-ok">确认</button>
+      <button type="button" class="btn" id="confirm-cancel">取消</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-note">
+      排行榜仅统计<strong>当前演示日</strong>；历史总步数只在“我的今日状态”展示，不参与排名。
+      团队榜默认按成员当日数值<strong>求和</strong>，后续可替换聚合策略（如平均）。
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" id="refresh-all">刷新数据</button>
+      <button type="button" class="btn btn-warn" id="next-day">下一天</button>
+      <button type="button" class="btn btn-danger" id="reset-demo">重置演示</button>
+    </div>
+  </footer>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
