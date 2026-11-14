@@ -1,0 +1,14 @@
+{
+  "name": "hongxin-sports-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "鸿心运动打卡排行榜一次性演示（虚构数据，无外部依赖）",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

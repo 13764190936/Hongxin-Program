@@ -1,0 +1,17 @@
+workbuddy-ready
+timestamp: 2026-11-07T16:41:04+08:00
+agent: WorkBuddy
+
+read_file: /Users/jiang/Documents/ChatGPT/鸿风软件开发/Hongxin-Program/_collaboration/shared-check.txt
+read_content_full: hongxin-shared-3ce3c084a5d7
+read_bytes: 28
+read_md5: 2a5ecb8f56334f2ad8f911a39f168c6c
+
+project_root_actual: /Users/jiang/Documents/ChatGPT/鸿风软件开发/Hongxin-Program
+collab_dir_actual: /Users/jiang/Documents/ChatGPT/鸿风软件开发/Hongxin-Program/_collaboration
+agents_md_actual: /Users/jiang/Documents/ChatGPT/鸿风软件开发/AGENTS.md
+agents_md_copy_actual: /Users/jiang/Documents/ChatGPT/鸿风软件开发/Hongxin-Program/AGENTS.md
+collab_readme_actual: /Users/jiang/Documents/ChatGPT/鸿风软件开发/Hongxin-Program/_collaboration/README.md
+
+path_note: 以上均为本机真实绝对路径（pwd -P 确认），非沙箱副本；同一组文件，读写即时可见。
+write_method: 直接写入上述 collab_dir_actual，未复制、未移动、未 push。

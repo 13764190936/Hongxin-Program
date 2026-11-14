@@ -1,0 +1,583 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-08T08:09:10.049349+00:00",
+  "title": "Design System: 鸿心 · 今日行动",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "ground",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "paper",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "ink",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "muted",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "line",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "accent",
+        "tonalRamp": [
+          "oklch(15% 0.0436 263.2)",
+          "oklch(27% 0.0785 263.2)",
+          "oklch(39% 0.1135 263.2)",
+          "oklch(51% 0.1484 263.2)",
+          "oklch(63% 0.1367 263.2)",
+          "oklch(75% 0.1018 263.2)",
+          "oklch(87% 0.0669 263.2)",
+          "oklch(95% 0.0436 263.2)"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "focus",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "hover": {
+        "role": "neutral",
+        "displayName": "hover",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "inverse": {
+        "role": "neutral",
+        "displayName": "inverse",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "accent-hover",
+        "tonalRamp": [
+          "oklch(15% 0.0436 262.8)",
+          "oklch(27% 0.0785 262.8)",
+          "oklch(39% 0.1135 262.8)",
+          "oklch(51% 0.1484 262.8)",
+          "oklch(63% 0.1367 262.8)",
+          "oklch(75% 0.1018 262.8)",
+          "oklch(87% 0.0669 262.8)",
+          "oklch(95% 0.0436 262.8)"
+        ]
+      },
+      "action-text": {
+        "role": "neutral",
+        "displayName": "action-text",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "night-ground": {
+        "role": "neutral",
+        "displayName": "night-ground",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "night-ink": {
+        "role": "neutral",
+        "displayName": "night-ink",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "night-muted": {
+        "role": "neutral",
+        "displayName": "night-muted",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "night-line": {
+        "role": "neutral",
+        "displayName": "night-line",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "night-hover": {
+        "role": "neutral",
+        "displayName": "night-hover",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(27% 0.0000 89.9)",
+          "oklch(39% 0.0000 89.9)",
+          "oklch(51% 0.0000 89.9)",
+          "oklch(63% 0.0000 89.9)",
+          "oklch(75% 0.0000 89.9)",
+          "oklch(87% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "project-early": {
+        "role": "secondary",
+        "displayName": "project-early",
+        "tonalRamp": [
+          "oklch(15% 0.0205 90.7)",
+          "oklch(27% 0.0369 90.7)",
+          "oklch(39% 0.0532 90.7)",
+          "oklch(51% 0.0696 90.7)",
+          "oklch(63% 0.0642 90.7)",
+          "oklch(75% 0.0478 90.7)",
+          "oklch(87% 0.0314 90.7)",
+          "oklch(95% 0.0205 90.7)"
+        ]
+      },
+      "project-early-ink": {
+        "role": "secondary",
+        "displayName": "project-early-ink",
+        "tonalRamp": [
+          "oklch(15% 0.0194 84.3)",
+          "oklch(27% 0.0350 84.3)",
+          "oklch(39% 0.0506 84.3)",
+          "oklch(51% 0.0661 84.3)",
+          "oklch(63% 0.0609 84.3)",
+          "oklch(75% 0.0454 84.3)",
+          "oklch(87% 0.0298 84.3)",
+          "oklch(95% 0.0194 84.3)"
+        ]
+      },
+      "project-run": {
+        "role": "secondary",
+        "displayName": "project-run",
+        "tonalRamp": [
+          "oklch(15% 0.0154 41.7)",
+          "oklch(27% 0.0277 41.7)",
+          "oklch(39% 0.0400 41.7)",
+          "oklch(51% 0.0523 41.7)",
+          "oklch(63% 0.0482 41.7)",
+          "oklch(75% 0.0359 41.7)",
+          "oklch(87% 0.0236 41.7)",
+          "oklch(95% 0.0154 41.7)"
+        ]
+      },
+      "project-run-ink": {
+        "role": "secondary",
+        "displayName": "project-run-ink",
+        "tonalRamp": [
+          "oklch(15% 0.0170 39.6)",
+          "oklch(27% 0.0306 39.6)",
+          "oklch(39% 0.0442 39.6)",
+          "oklch(51% 0.0578 39.6)",
+          "oklch(63% 0.0533 39.6)",
+          "oklch(75% 0.0397 39.6)",
+          "oklch(87% 0.0261 39.6)",
+          "oklch(95% 0.0170 39.6)"
+        ]
+      },
+      "project-steps": {
+        "role": "secondary",
+        "displayName": "project-steps",
+        "tonalRamp": [
+          "oklch(15% 0.0112 233.4)",
+          "oklch(27% 0.0202 233.4)",
+          "oklch(39% 0.0291 233.4)",
+          "oklch(51% 0.0381 233.4)",
+          "oklch(63% 0.0351 233.4)",
+          "oklch(75% 0.0261 233.4)",
+          "oklch(87% 0.0172 233.4)",
+          "oklch(95% 0.0112 233.4)"
+        ]
+      },
+      "project-steps-ink": {
+        "role": "secondary",
+        "displayName": "project-steps-ink",
+        "tonalRamp": [
+          "oklch(15% 0.0151 235.2)",
+          "oklch(27% 0.0271 235.2)",
+          "oklch(39% 0.0392 235.2)",
+          "oklch(51% 0.0512 235.2)",
+          "oklch(63% 0.0472 235.2)",
+          "oklch(75% 0.0352 235.2)",
+          "oklch(87% 0.0231 235.2)",
+          "oklch(95% 0.0151 235.2)"
+        ]
+      },
+      "project-read": {
+        "role": "secondary",
+        "displayName": "project-read",
+        "tonalRamp": [
+          "oklch(15% 0.0125 297.9)",
+          "oklch(27% 0.0225 297.9)",
+          "oklch(39% 0.0326 297.9)",
+          "oklch(51% 0.0426 297.9)",
+          "oklch(63% 0.0392 297.9)",
+          "oklch(75% 0.0292 297.9)",
+          "oklch(87% 0.0192 297.9)",
+          "oklch(95% 0.0125 297.9)"
+        ]
+      },
+      "project-read-ink": {
+        "role": "secondary",
+        "displayName": "project-read-ink",
+        "tonalRamp": [
+          "oklch(15% 0.0232 297.8)",
+          "oklch(27% 0.0418 297.8)",
+          "oklch(39% 0.0604 297.8)",
+          "oklch(51% 0.0790 297.8)",
+          "oklch(63% 0.0728 297.8)",
+          "oklch(75% 0.0542 297.8)",
+          "oklch(87% 0.0356 297.8)",
+          "oklch(95% 0.0232 297.8)"
+        ]
+      },
+      "project-visit": {
+        "role": "secondary",
+        "displayName": "project-visit",
+        "tonalRamp": [
+          "oklch(15% 0.0110 352.2)",
+          "oklch(27% 0.0199 352.2)",
+          "oklch(39% 0.0287 352.2)",
+          "oklch(51% 0.0375 352.2)",
+          "oklch(63% 0.0346 352.2)",
+          "oklch(75% 0.0257 352.2)",
+          "oklch(87% 0.0169 352.2)",
+          "oklch(95% 0.0110 352.2)"
+        ]
+      },
+      "project-visit-ink": {
+        "role": "secondary",
+        "displayName": "project-visit-ink",
+        "tonalRamp": [
+          "oklch(15% 0.0174 349.5)",
+          "oklch(27% 0.0313 349.5)",
+          "oklch(39% 0.0453 349.5)",
+          "oklch(51% 0.0592 349.5)",
+          "oklch(63% 0.0546 349.5)",
+          "oklch(75% 0.0406 349.5)",
+          "oklch(87% 0.0267 349.5)",
+          "oklch(95% 0.0174 349.5)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "clock": {
+        "displayName": "本机时钟",
+        "purpose": "首页时分；桌面最高 82px、移动 64px。"
+      },
+      "headline": {
+        "displayName": "子页标题",
+        "purpose": "桌面32px、移动28px。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "orb",
+        "value": "0 6px 18px -12px #00000026",
+        "purpose": "项目圆形轻微下偏柔影。"
+      },
+      {
+        "name": "orb-hover",
+        "value": "0 8px 20px -12px #00000032",
+        "purpose": "项目圆形悬停。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "orb-selection",
+        "value": "420ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "球体选择切换。"
+      },
+      {
+        "name": "page-transition",
+        "value": "580ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "进入或返回的垂直位移；减少动态效果时关闭。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "600px"
+      }
+    ],
+    "notes": [
+      "Flat Vector Design; current app.css is the only loaded stylesheet.",
+      "Opaque category fills, no gradient, blur, highlight or texture.",
+      "Archived variants and proof screenshots are not shipping assets."
+    ],
+    "themes": {
+      "default": "local-time-auto",
+      "dayHours": "06:00–17:59",
+      "manualOverride": "current page session",
+      "refreshInterval": "30000ms",
+      "nightOverrides": {
+        "ground": "#111111",
+        "paper": "#111111",
+        "ink": "#ffffff",
+        "muted": "#b5b5b5",
+        "line": "#424242",
+        "focus": "#ffffff",
+        "hover": "#292929",
+        "inverse": "#111111"
+      }
+    },
+    "projectColors": {
+      "early": {
+        "background": "#f8e4ac",
+        "foreground": "#665020"
+      },
+      "run": {
+        "background": "#f6c9b8",
+        "foreground": "#673e30"
+      },
+      "steps": {
+        "background": "#c3e2f4",
+        "foreground": "#294e63"
+      },
+      "read": {
+        "background": "#dbd2f3",
+        "foreground": "#4e3d70"
+      },
+      "visit": {
+        "background": "#f3d2df",
+        "foreground": "#673e52"
+      }
+    },
+    "surfaceFinish": {
+      "controlRadius": "12px",
+      "primaryRadius": "16px",
+      "avatarRadius": "14px",
+      "uploadRadius": "16px",
+      "orbShadow": "0 12px 28px -16px #00000032",
+      "orbFill": "radial-gradient(circle at 30% 20%,#ffffff66,transparent 65%),linear-gradient(160deg,transparent 60%,#00000008),var(--project-color)"
+    },
+    "activeVisualTrial": {
+      "name": "liquid-glass",
+      "stylesheet": "frontend/orb-preview/glass.css",
+      "confirmedFinal": false,
+      "baseStylesheet": "frontend/orb-preview/app.css",
+      "behavior": "Pastel translucent lenses, blur and specular rim; blue primary actions; reduced-transparency and unsupported-browser opaque fallbacks",
+      "scope": "Web visual approximation, no physical refraction"
+    },
+    "homeNavigation": {
+      "standalonePrimaryButton": false,
+      "entry": [
+        "selected project circle",
+        "unfilled text cue",
+        "downward touch gesture on project/info",
+        "wheel down at homepage bottom",
+        "PageDown"
+      ],
+      "guidance": "Project description and current mock status",
+      "taskActionButtons": "preserved",
+      "return": [
+        "back button",
+        "Escape"
+      ]
+    },
+    "projectBubbleContent": {
+      "illustrations": true,
+      "iconSize": "58px",
+      "strokeWidth": 1.45,
+      "fontSize": "16px",
+      "style": "consistent rounded line icons"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "全宽主要操作。",
+      "html": "<button class=\"ds-primary\">进入跑步</button>",
+      "css": ".ds-primary{font-family:-apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Microsoft YaHei\", sans-serif;font-size:16px;cursor:pointer;border:0;background:var(--accent,#175cff);color:#ffffff;padding:14px 24px;min-height:54px;border-radius:12px;font-weight:650;width:100%}.ds-primary:hover{background:#0046dc}.ds-primary:focus-visible{outline:3px solid var(--focus,#111111);outline-offset:5px}.ds-primary:disabled{opacity:.5;cursor:not-allowed}.ds-primary:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Transparent navigation",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "页面返回与辅助入口。",
+      "html": "<button class=\"ds-ghost\">返回首页</button>",
+      "css": ".ds-ghost{font-family:-apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Microsoft YaHei\", sans-serif;font-size:16px;cursor:pointer;border:0;background:transparent;color:var(--ink,#111111);min-height:44px;padding:10px 14px;border-radius:12px}.ds-ghost:hover{background:var(--hover,#ededed)}.ds-ghost:focus-visible{outline:3px solid var(--focus,#111111);outline-offset:5px}"
+    },
+    {
+      "name": "Project tabs",
+      "kind": "nav",
+      "refersTo": "tab",
+      "description": "项目与范围标签共享的明确选中态。",
+      "html": "<nav class=\"ds-tabs\" aria-label=\"项目\"><button aria-pressed=\"true\">跑步</button><button aria-pressed=\"false\">步数</button></nav>",
+      "css": ".ds-tabs{display:flex;gap:4px}.ds-tabs button{font-family:-apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Microsoft YaHei\", sans-serif;font-size:16px;cursor:pointer;border:0;border:1px solid var(--line,#d6d6d6);border-radius:12px;background:transparent;color:var(--ink,#111111);padding:10px 15px;min-height:44px;font-size:14px}.ds-tabs button[aria-pressed=true]{background:var(--accent,#175cff);color:white}.ds-tabs button:hover:not([aria-pressed=true]){background:var(--hover,#ededed)}.ds-tabs button:focus-visible{outline:3px solid var(--focus,#111111);outline-offset:5px}"
+    },
+    {
+      "name": "Display name field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "个人资料文字输入。",
+      "html": "<label class=\"ds-field\">显示名称<input value=\"林小满\" autocomplete=\"nickname\"></label>",
+      "css": ".ds-field{font-family:-apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Microsoft YaHei\", sans-serif;font-size:14px;font-weight:600;color:var(--ink,#111111)}.ds-field input{display:block;font:inherit;color:inherit;margin-top:10px;border:1px solid var(--line,#d6d6d6);background:var(--paper,#ffffff);border-radius:12px;min-height:50px;padding:12px 14px;width:100%;box-sizing:border-box}.ds-field input:focus-visible{outline:3px solid var(--focus,#111111);outline-offset:5px}"
+    },
+    {
+      "name": "Screenshot upload",
+      "kind": "custom",
+      "description": "本地截图选择与预览入口。",
+      "html": "<label class=\"ds-upload\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M12 16V3m-5 5 5-5 5 5M4 15v6h16v-6\"/></svg><strong>选择跑步截图</strong><small>JPG / PNG，最大 5 MB</small><input type=\"file\" accept=\"image/jpeg,image/png\" aria-label=\"选择跑步截图\"></label>",
+      "css": ".ds-upload{font-family:-apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Microsoft YaHei\", sans-serif;color:var(--ink,#111111);position:relative;display:flex;min-height:200px;align-items:center;justify-content:center;flex-direction:column;gap:12px;border:1px solid var(--line,#d6d6d6);border-radius:12px;background:var(--paper,#ffffff);padding:24px;text-align:center;box-sizing:border-box}.ds-upload:hover{background:var(--hover,#ededed)}.ds-upload:focus-within{outline:3px solid var(--focus,#111111);outline-offset:4px}.ds-upload svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.ds-upload small{font-size:13px;color:var(--muted,#626262)}.ds-upload input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}"
+    },
+    {
+      "name": "Flat task circle",
+      "kind": "custom",
+      "description": "不透明项目色、统一线性图标与项目名。",
+      "html": "<button class=\"ds-orb\" aria-label=\"跑步，进入项目\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><circle cx=\"15.5\" cy=\"3.8\" r=\"2\"/><path d=\"m5 10 4-3 3.2.8 3.3 4.1H20M12.2 7.8l-2.6 6.3 4.9 2.6-1.2 4.3M9.6 14.1 6 20H3\"/></svg><span>跑步</span></button>",
+      "css": ".ds-orb{width:196px;aspect-ratio:1;border:0;border-radius:50%;background:#f6c9b8;color:#673e30;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:13px;padding:0;cursor:pointer;box-shadow:var(--orb-shadow,0 6px 18px -12px #00000026)}.ds-orb:hover{box-shadow:var(--orb-hover-shadow,0 8px 20px -12px #00000032)}.ds-orb:focus-visible{outline:3px solid var(--focus,#111111);outline-offset:5px}.ds-orb svg{width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ds-orb span{font-family:-apple-system,BlinkMacSystemFont,\"PingFang SC\",\"Microsoft YaHei\",sans-serif;font-size:15px;font-weight:600;letter-spacing:.02em}"
+    },
+    {
+      "name": "Project ranking",
+      "kind": "custom",
+      "description": "细分隔与本人行加粗；无阴影。",
+      "html": "<table class=\"ds-board\"><thead><tr><th>排名</th><th>学员</th><th>今日步数</th></tr></thead><tbody><tr><td>1</td><td>陈晨<small>晨光队</small></td><td>12,640 步</td></tr><tr class=\"ds-self\"><td>3</td><td>林小满<small>晨光队 · 我</small></td><td>8,260 步</td></tr></tbody></table>",
+      "css": ".ds-board{font-family:-apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Microsoft YaHei\", sans-serif;color:var(--ink,#111111);width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}.ds-board th{text-align:left;font-size:12px;color:var(--muted,#626262);font-weight:500;padding:14px 0;border-bottom:1px solid var(--line,#d6d6d6)}.ds-board td{padding:18px 0;border-bottom:1px solid var(--line,#d6d6d6)}.ds-board td:first-child{width:55px;color:var(--muted,#626262)}.ds-board td:last-child,.ds-board th:last-child{text-align:right}.ds-board .ds-self td{font-weight:600;color:var(--ink,#111111)}.ds-board small{display:block;font-size:12px;font-weight:400;margin-top:4px;color:var(--muted,#626262)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Flat Vector Design",
+    "overview": "Flat Vector Design 是当前锁定的视觉语言。任务圆形采用完全不透明的柔和彩色填充，搭配清楚的线性图标与文字；项目身份通过色彩保留，当前选择通过大小与位置突出。\n\n本系统从 frontend/orb-preview 当前加载的 app.css 与 app.js 提取。黑白日夜背景、亮蓝任务操作和统一圆角形成稳定框架；首页以轻提示进入，子页以直接表单与独立项目榜单完成操作。玻璃变体仅为归档，不属于当前规范。",
+    "keyCharacteristics": [
+      "不透明纯色与平面矢量轮廓。",
+      "柔和项目色在日夜主题和选择状态中保持。",
+      "统一 14px 控件圆角，圆形仅用于项目与状态点。",
+      "首页轻入口，子页蓝色操作，实时本机时钟。"
+    ],
+    "rules": [
+      {
+        "name": "The Opaque Fill Rule",
+        "body": "项目圆形使用不透明纯色；不使用渐变、背景模糊、高光或纹理。",
+        "section": "colors"
+      },
+      {
+        "name": "The Quiet Offset Rule",
+        "body": "仅项目圆形使用轻微下偏柔影；控件与表格不增加材质和悬浮层次。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 用大小与位置表示当前任务，并保留项目色和文字。",
+      "Do 对按钮、标签、头像、输入和上传区统一使用 14px 圆角。",
+      "Do 保留独立项目榜、文字状态、键盘焦点及减少动态效果支持。",
+      "Do 区分本地体验、示例数据与真实业务完成。"
+    ],
+    "donts": [
+      "Don't 恢复玻璃模糊、半透明材质、渐变、高光或纹理。",
+      "Don't 在首页恢复大型蓝色进入按钮；蓝色主操作用于子页任务。",
+      "Don't 添加返回滑动手势或综合分排名。"
+    ]
+  }
+}

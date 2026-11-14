@@ -1,0 +1,72 @@
+/* Liquid-glass study. Remove this stylesheet to restore the pastel version. */
+:root{
+  --glass-surface:#ffffff70;
+  --glass-edge:#ffffffd9;
+  --glass-shadow:0 12px 28px -16px #21355235;
+  --glass-hover:#ffffffa6;
+}
+:root[data-theme="night"]{
+  --glass-surface:#252a337a;
+  --glass-edge:#ffffff45;
+  --glass-shadow:0 14px 32px -16px #00000080;
+  --glass-hover:#343a45a6;
+}
+.orb{--lens-fill:radial-gradient(ellipse at 27% 15%,#ffffffe6 0%,#ffffff55 23%,transparent 53%),linear-gradient(145deg,#ffffff55,transparent 54%,#ffffff66),color-mix(in srgb,var(--project-color) 70%,transparent)}
+:root[data-theme="night"] .orb{--lens-fill:radial-gradient(ellipse at 27% 15%,#ffffffb3,transparent 52%),linear-gradient(145deg,#ffffff40,transparent 55%,#ffffff40),color-mix(in srgb,var(--project-color) 86%,transparent)}
+.carousel{isolation:isolate}
+.carousel:before{
+  content:"";position:absolute;z-index:-1;pointer-events:none;width:130%;height:100px;
+  background:linear-gradient(105deg,transparent 8%,#f4dcc6 27%,#c9dff5 53%,#e5d5f1 76%,transparent 94%);
+  transform:rotate(-16deg);filter:blur(24px);opacity:.62;
+}
+:root[data-theme="night"] .carousel:before{opacity:.29}
+.orb,.orb[data-offset="0"]{
+  background:var(--lens-fill);color:var(--project-ink);
+  -webkit-backdrop-filter:blur(18px) saturate(135%);backdrop-filter:blur(18px) saturate(135%);
+  box-shadow:0 16px 36px -20px #26395745,inset 0 1px 2px #fffffff0,inset 0 -1px 2px #ffffff85;
+}
+.orb:before{
+  content:"";position:absolute;pointer-events:none;left:17%;top:9%;width:32%;height:13%;border-radius:50%;
+  background:linear-gradient(180deg,#ffffff80,transparent);transform:rotate(-32deg);filter:blur(5px);
+}
+.orb:after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  padding:1.5px;background:linear-gradient(135deg,#ffffffed,#ffffff1a 37%,#ffffff20 65%,#ffffffe0);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+.orb:hover{box-shadow:0 20px 40px -20px #26395755,inset 0 1px 2px #ffffff,inset 0 -1px 2px #ffffffaa}
+.orb-label{position:relative;z-index:1}
+.theme-toggle,.plain-button,.back,.arrow,.tab:not([aria-pressed="true"]),.upload,.field input{
+  background:var(--glass-surface);border:0;
+  -webkit-backdrop-filter:blur(16px) saturate(130%);backdrop-filter:blur(16px) saturate(130%);
+  box-shadow:var(--glass-shadow),inset 0 1px 1px var(--glass-edge),inset 0 -1px 1px #74879f18;
+}
+.plain-button{padding:10px 14px;border-radius:18px}
+.theme-toggle,.arrow{border-radius:16px}
+.back{padding:10px 14px;border-radius:16px}
+.theme-toggle:hover,.plain-button:hover,.back:hover,.arrow:hover,.upload:hover,.tab:hover:not([aria-pressed="true"]){background:var(--glass-hover)}
+.primary,.tab[aria-pressed="true"]{
+  background:linear-gradient(155deg,#2464f5,#1251e8);color:#ffffff;
+  box-shadow:0 7px 18px -10px #175cff85,inset 0 1px 1px #ffffff70,inset 0 -1px 1px #092f9a55;
+}
+.primary:hover,.tab[aria-pressed="true"]:hover{background:linear-gradient(155deg,#175cff,#0846d2)}
+.avatar{border-radius:16px}
+.upload{min-height:200px}
+.field input{background:var(--paper)}
+@media(max-width:600px){
+  .header-actions{gap:8px}.plain-button{padding:10px 11px;gap:5px}.theme-toggle{width:42px;height:44px}
+  .carousel:before{height:85px}.profile-button{gap:8px}
+}
+@media(prefers-reduced-transparency:reduce){
+  .orb,.orb[data-offset="0"]{background:var(--project-color);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .theme-toggle,.plain-button,.back,.arrow,.tab:not([aria-pressed="true"]),.upload,.field input{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .carousel:before,.orb:before,.orb:after{display:none}
+}
+@supports not (backdrop-filter:blur(1px)){
+  .orb,.orb[data-offset="0"]{background:var(--project-color)}
+  .theme-toggle,.plain-button,.back,.arrow,.tab:not([aria-pressed="true"]),.upload{background:var(--paper)}
+}
+
+.project-icon{position:relative;z-index:1}

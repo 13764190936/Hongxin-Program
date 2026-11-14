@@ -1,0 +1,28 @@
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets/
+# Local tooling and build products
+.DS_Store
+.idea/
+.vscode/
+node_modules/
+dist/
+build/
+coverage/
+*.log
+__pycache__/
+.venv/
+
+# 本地后端数据库与临时文件
+server/data/
+server/*.db
+server/*.db-wal
+server/*.db-shm
+

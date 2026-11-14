@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>鸿心行动 · 真实后端演示</title>
+<style>
+:root{--paper:#f5f4ef;--ink:#223b32;--muted:#7e8c83;--green:#23654e;--line:#e0e4d8;--soft:#eaf0e8;--warn:#9a6b1f;--red:#a33}
+*{box-sizing:border-box}
+body{margin:0;background:#e9ebe3;color:var(--ink);font:14px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 80px}
+h1{font-size:22px;font-weight:600;margin:0 0 6px;letter-spacing:-.3px}
+.sub{color:var(--muted);font-size:12.5px;margin:0 0 18px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.card h2{font-size:14px;font-weight:600;margin:0 0 12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select,input,button{font:inherit;font-size:13px}
+select,input[type=number],input[type=text]{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 10px;color:var(--ink)}
+button{border:0;border-radius:9px;padding:8px 14px;background:var(--green);color:#fff;cursor:pointer}
+button.ghost{background:#fff;color:var(--green);border:1px solid #cdd8cd}
+button:disabled{opacity:.45;cursor:default}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:11.5px}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:20px;background:var(--soft);color:var(--green)}
+.tag.warn{background:#fbf1dc;color:var(--warn)}
+.tag.grey{background:#eef0ea;color:var(--muted)}
+.tag.red{background:#f7e6e4;color:var(--red)}
+.mono{font-variant-numeric:tabular-nums;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.log{font:11.5px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:#4b5b50;max-height:190px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px}
+.log b{color:var(--green);font-weight:500}
+.log .e{color:var(--red)}
+.hint{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.7}
+.kv{display:flex;gap:8px;font-size:12.5px;margin-bottom:6px}
+.kv span:first-child{color:var(--muted);min-width:76px}
+.empty{color:var(--muted);font-size:12.5px;padding:10px 0}
+.banner{background:#fbf1dc;border:1px solid #ecd9ae;color:#7d5a16;border-radius:12px;padding:12px 14px;font-size:12.5px;margin-bottom:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>鸿心行动 · 真实后端演示</h1>
+  <p class="sub">这一页不是原型。下面每个按钮都会真的写进本地 SQLite 数据库，刷新后数据还在。</p>
+
+  <div class="banner">
+    演示账号是虚构的。这里用请求头 <b>X-Test-User</b> 传身份，属<b>测试适配层</b>，正式版要换成服务端会话。
+  </div>
+
+  <div class="card">
+    <h2>1. 选择身份</h2>
+    <div class="row">
+      <select id="userSel"></select>
+      <button class="ghost" id="btnMe">读我的身份</button>
+      <span id="meInfo" class="hint" style="margin:0"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2. 今日行动（点了就写库）</h2>
+    <div id="tasks" class="empty">加载中…</div>
+    <div class="row" style="margin-top:14px">
+      <label style="font-size:12px;color:var(--muted)">
+        <input type="checkbox" id="simEarly"> 演示：按 05:31:20 提交早起（会被标为待核，见下方说明）
+      </label>
+    </div>
+    <div class="hint" id="earlyHint">现在不是 05:31，直接点「早起」会被服务端拒绝（422 不在窗口内）——这是真实行为，不是 bug。</div>
+  </div>
+
+  <div class="card">
+    <h2>3. 我的记录</h2>
+    <div id="records" class="empty">加载中…</div>
+  </div>
+
+  <div class="card">
+    <h2>4. 排行（真实计算，只做单项目 / 小组或企业内）</h2>
+    <div class="row" style="margin-bottom:12px">
+      <select id="scope"><option value="team">小组内</option><option value="enterprise">企业内</option></select>
+      <select id="metric">
+        <option value="early_count">早起次数</option>
+        <option value="run_km">晨跑里程</option>
+        <option value="read_minutes">阅读分钟</option>
+      </select>
+      <select id="period"><option value="day">今天</option><option value="week">本周</option></select>
+      <button class="ghost" id="btnRank">查排行</button>
+    </div>
+    <div id="rank" class="empty">还没查</div>
+  </div>
+
+  <div class="card">
+    <h2>5. 团队</h2>
+    <div id="teams" class="empty">加载中…</div>
+  </div>
+
+  <div class="card">
+    <h2>6. 权限演示（后台不做，但校验现在就有）</h2>
+    <div class="row">
+      <button class="ghost" id="btnAdmin">用当前身份读「全企业记录」</button>
+      <button class="ghost" id="btnExport">用当前身份导出 CSV</button>
+    </div>
+    <div id="adminOut" class="hint"></div>
+  </div>
+
+  <div class="card">
+    <h2>7. 最近请求（证明真的在调接口）</h2>
+    <div class="log" id="log">等待操作…</div>
+  </div>
+</div>
+
+<script>
+
+// 部署后站点带 ?sharecode=…，页面内的接口请求必须一起带上，否则被网关拦成「链接不完整」
+(() => {
+  const raw = window.fetch.bind(window);
+  window.fetch = (u, o) => {
+    if (typeof u === 'string' && u.startsWith('/')) {
+      const q = location.search.replace(/^\?/, '');
+      if (q) u += (u.includes('?') ? '&' : '?') + q;
+    }
+    return raw(u, o);
+  };
+})();
+const $ = s => document.querySelector(s);
+const logEl = $('#log');
+let logLines = [];
+
+function log(ok, method, path, detail) {
+  const t = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+  logLines.unshift(`<div>${t} <b>${method}</b> ${path} ${ok ? '✓' : '<span class="e">✕</span>'} ${detail || ''}</div>`);
+  logEl.innerHTML = logLines.slice(0, 30).join('');
+}
+
+function currentUser() { return $('#userSel').value; }
+
+async function api(path, { method = 'GET', body } = {}) {
+  const res = await fetch(path, {
+    method,
+    headers: { 'content-type': 'application/json', 'x-test-user': currentUser() },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const text = await res.text();
+  let data;
+  try { data = JSON.parse(text); } catch { data = text; }
+  log(res.ok, method, path, res.ok ? `${res.status}` : `${res.status} ${data.error ? data.error.code : ''}`);
+  return { status: res.status, ok: res.ok, data };
+}
+
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+const KIND_LABEL = { early: '早起', run: '晨跑', read: '阅读', visit: '拜访' };
+const STATUS = {
+  valid: ['有效', ''],
+  pending_review: ['待核', 'warn'],
+  rejected: ['已拒', 'red'],
+};
+
+function statusTag(s) {
+  const [label, cls] = STATUS[s] || [s, 'grey'];
+  return `<span class="tag ${cls}">${label}</span>`;
+}
+
+async function boot() {
+  const meta = await api('/api/meta');
+  const sel = $('#userSel');
+  sel.innerHTML = meta.data.users.map(u =>
+    `<option value="${u.id}">${esc(u.name)} · ${u.role === 'admin' ? '管理员' : '员工'} · ${u.enterpriseId}</option>`).join('');
+  await refreshAll();
+}
+
+async function refreshAll() { await Promise.all([loadMe(), loadToday(), loadRecords(), loadTeams()]); }
+
+async function loadMe() {
+  const r = await api('/api/me');
+  if (!r.ok) { $('#meInfo').textContent = r.data.error.message; return; }
+  const d = r.data;
+  $('#meInfo').innerHTML = `${esc(d.name)} · ${d.role} · ${esc(d.enterpriseId)} · 团队：${d.team ? esc(d.team.name) : '未加入'}`;
+}
+
+async function loadToday() {
+  const r = await api('/api/today');
+  if (!r.ok) { $('#tasks').textContent = r.data.error.message; return; }
+  $('#tasks').innerHTML = r.data.tasks.map(t => {
+    const rec = t.records[0];
+    const detail = rec ? `${(rec.metrics.distanceKm ? rec.metrics.distanceKm + ' 公里 · ' : '')}${rec.metrics.readSeconds ? Math.round(rec.metrics.readSeconds / 60) + ' 分钟 · ' : ''}${rec.clientClaimedBj.slice(11, 19)}` : '';
+    return `<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)">
+      <span style="font-weight:500;min-width:52px">${KIND_LABEL[t.kind]}</span>
+      <span style="flex:1;font-size:12px;color:var(--muted)">${t.done ? detail : '未记录'}</span>
+      ${t.done ? statusTag(rec.status) : ''}
+      <button class="ghost" data-act="${t.kind}" ${t.done ? 'disabled' : ''}>${t.done ? '已完成' : '提交'}</button>
+    </div>`;
+  }).join('');
+}
+
+async function loadRecords() {
+  const r = await api('/api/records?limit=20');
+  if (!r.ok) { $('#records').textContent = r.data.error.message; return; }
+  if (!r.data.rows.length) { $('#records').innerHTML = '<div class="empty">还没有记录</div>'; return; }
+  $('#records').innerHTML = `<table><thead><tr><th>日期</th><th>项目</th><th>状态</th><th>客户端时刻</th><th>指标</th></tr></thead><tbody>
+    ${r.data.rows.map(x => `<tr>
+      <td class="mono">${x.bizDate} ${x.clientClaimedBj.slice(11, 19)}</td>
+      <td>${KIND_LABEL[x.kind]}</td>
+      <td>${statusTag(x.status)}${x.reviewReason ? `<div style="font-size:10.5px;color:var(--muted)">${esc(x.reviewReason)}</div>` : ''}</td>
+      <td class="mono" style="font-size:11px">${x.clientClaimedBj}</td>
+      <td class="mono" style="font-size:11px">${esc(JSON.stringify(x.metrics))}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+async function loadTeams() {
+  const r = await api('/api/teams');
+  if (!r.ok) { $('#teams').textContent = r.data.error.message; return; }
+  $('#teams').innerHTML = r.data.rows.map(t => `<div style="display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)">
+    <div style="flex:1"><div style="font-weight:500">${esc(t.name)}</div>
+      <div style="font-size:11.5px;color:var(--muted)">${t.memberCount} 人 · ${esc(t.city)} · 邀请码 ${t.inviteCode}</div></div>
+    <button class="ghost" data-join="${t.id}">加入</button>
+  </div>`).join('') || '<div class="empty">本企业本课程下还没有团队</div>';
+}
+
+async function submit(kind) {
+  const payload = { kind, idempotencyKey: 'demo-' + kind + '-' + Date.now(), claimedAt: new Date().toISOString() };
+  if (kind === 'early' && $('#simEarly').checked) {
+    const d = new Date();
+    const p = n => String(n).padStart(2, '0');
+    payload.claimedAt = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T05:31:20.000+08:00`;
+  }
+  if (kind === 'run') Object.assign(payload, { payload: { distanceKm: 3.2, minutes: 26, steps: 4280, imageRef: 'local:demo', ocrMock: true } });
+  if (kind === 'read') payload.payload = { readSeconds: 900, completed: true };
+  if (kind === 'visit') payload.payload = {};
+
+  const r = await api('/api/actions', { method: 'POST', body: payload });
+  if (!r.ok) { alert('被服务端拒绝：' + r.data.error.message); }
+  await refreshAll();
+}
+
+$('#btnMe').onclick = loadMe;
+$('#btnRank').onclick = async () => {
+  const q = `scope=${$('#scope').value}&metric=${$('#metric').value}&period=${$('#period').value}`;
+  const r = await api('/api/rankings?' + q);
+  if (!r.ok) { $('#rank').innerHTML = `<div class="empty">${esc(r.data.error.message)}</div>`; return; }
+  const d = r.data;
+  $('#rank').innerHTML = `
+    <div style="font-size:11.5px;color:var(--muted);margin-bottom:8px">
+      ${esc(d.metricLabel)} · ${d.period === 'week' ? d.from + ' 至 ' + d.to : d.from} · ${d.scope === 'team' ? '小组内' : '企业内'}
+      ${d.team ? ' · ' + esc(d.team) : ''}
+    </div>
+    ${d.rows.length ? `<table><thead><tr><th>名次</th><th>${d.scope === 'team' ? '成员' : '团队'}</th><th>${esc(d.metricLabel)}（${esc(d.unit)}）</th></tr></thead><tbody>
+      ${d.rows.map(x => `<tr><td class="mono">${x.rank}</td><td>${esc(x.name)}${x.isMe ? ' · 我' : ''}</td><td class="mono">${x.value}</td></tr>`).join('')}
+    </tbody></table>` : `<div class="empty">${esc(d.note || '暂无数据')}</div>`}`;
+};
+
+$('#btnAdmin').onclick = async () => {
+  const r = await api('/api/admin/records?limit=20');
+  $('#adminOut').innerHTML = r.ok
+    ? `读到 ${r.data.rows.length} 条（只含自己企业的）。`
+    : `<span style="color:var(--red)">被拒：${esc(r.data.error.message)}</span>`;
+};
+
+$('#btnExport').onclick = async () => {
+  const res = await fetch('/api/admin/export.csv', { headers: { 'x-test-user': currentUser() } });
+  log(res.ok, 'GET', '/api/admin/export.csv', String(res.status));
+  if (!res.ok) {
+    const t = await res.text();
+    $('#adminOut').innerHTML = `<span style="color:var(--red)">导出被拒（${res.status}）：${esc(t.slice(0, 80))}</span>`;
+    return;
+  }
+  const blob = await res.blob();
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'actions.csv';
+  a.click();
+  $('#adminOut').innerHTML = '已下载 CSV（导出已记入 export_logs）。';
+};
+
+document.addEventListener('click', async (e) => {
+  const act = e.target.closest('[data-act]');
+  if (act) { await submit(act.dataset.act); return; }
+  const join = e.target.closest('[data-join]');
+  if (join) {
+    const r = await api(`/api/teams/${join.dataset.join}/join`, { method: 'POST' });
+    if (!r.ok) alert('加入失败：' + r.data.error.message);
+    await refreshAll();
+  }
+});
+
+$('#userSel').onchange = refreshAll;
+
+boot();
+</script>
+</body>
+</html>
+
