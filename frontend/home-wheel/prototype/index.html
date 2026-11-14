@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F7F8FA">
+<title>鸿风 · 今日行动</title>
+<link rel="stylesheet" href="prototype.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<main class="home" id="home">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="wordmark">HONGFENG</span>
+      <span class="brand-cn">鸿风</span>
+    </div>
+    <div class="meta">
+      <span class="date" id="today">2026.11.14</span>
+      <span class="meta-rule" aria-hidden="true"></span>
+      <span class="counter"><b id="counter-current">01</b> / 03</span>
+    </div>
+  </header>
+
+  <section class="stage">
+
+    <div class="editorial">
+      <p class="eyebrow">每日行动 / DAILY PRACTICE</p>
+      <h1>今天，<br>选一件事。</h1>
+      <p class="slogan"><span class="slogan-mark" aria-hidden="true"></span>完成一个不可能的未来</p>
+      <p class="lede">运动、读书、拜访。每天完成一件，让进展可见。</p>
+    </div>
+
+    <div class="selector">
+
+      <div class="wheel" id="wheel" role="listbox" tabindex="0"
+           aria-label="一级入口：运动、读书、拜访" aria-orientation="vertical">
+        <div class="wheel-viewport">
+          <div class="wheel-track" id="track" aria-hidden="true"></div>
+          <div class="wheel-fade" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="labels" id="labels" aria-hidden="true">
+        <span class="label-bar"></span>
+        <div class="label-track" id="labelTrack"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p class="hint"><span class="hint-mark" aria-hidden="true"></span>上下滑动选择 · 点按当前项进入</p>
+    <p class="keys">↑ ↓ 选择 · Enter 进入</p>
+  </footer>
+
+</main>
+
+<section class="detail" id="detail" hidden aria-labelledby="detail-title">
+  <header class="detail-bar">
+    <button class="back" type="button" id="back">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>返回
+    </button>
+    <span class="detail-counter" id="detail-counter">01 / 03</span>
+  </header>
+  <div class="detail-body">
+    <p class="eyebrow" id="detail-eyebrow">运动 / MOVEMENT</p>
+    <h1 id="detail-title" tabindex="-1">运动</h1>
+    <p class="lede" id="detail-lede">起床、步数与跑步都收在运动里。</p>
+    <ul class="sub-list" id="detail-list"></ul>
+    <p class="note">原型占位：本轮只验证进入与返回的导航衔接，不实现次级页业务规则。</p>
+  </div>
+</section>
+
+<p class="sr-only" id="live" aria-live="polite"></p>
+
+</body>
+</html>
