@@ -1,3 +1,7 @@
+# GitHub 接续（2026-11-15）
+
+当前版本同步至 [13764190936/Hongxin-Program](https://github.com/13764190936/Hongxin-Program)，分支 `main`，同步标签 `github-design-v1.1.0`。[其他编辑器打开与双向同步说明](docs/GITHUB-SYNC.md)。当前 Mac 继续使用原工作目录；GitHub 仓库根目录直接对应业务工程。仓库更新与演示网站发布分别执行。
+
 # 当前里程碑｜design-v1.1.0 · 首版约20%（2026-11-14）
 
 用户确认当前首版工作约完成20%，后续由CodeBuddy承接实现、测试与修复。**[接续说明](docs/CODEBUDDY-HANDOFF.md)**。公网预览：https://demo.jerry1325.cn/ 。此版为设计与交互原型，真实微信与业务数据闭环尚待建设。下方旧说明留作历史，以本节和接续说明为准。

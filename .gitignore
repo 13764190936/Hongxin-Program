@@ -6,8 +6,10 @@
 *.key
 *.p12
 *.pfx
+*.mobileprovision
 credentials.json
 secrets/
+.aws/
 # Local tooling and build products
 .DS_Store
 .idea/
@@ -19,10 +21,24 @@ coverage/
 *.log
 __pycache__/
 .venv/
+*.pyc
 
 # 本地后端数据库与临时文件
 server/data/
 server/*.db
 server/*.db-wal
 server/*.db-shm
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+
+# 本地交接副本与导出包
+.handoff-staging/
+*.zip
 

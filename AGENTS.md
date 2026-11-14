@@ -32,3 +32,9 @@
 - 用户确认首版工作目前约完成20%，保存为design-v1.1.0；后续实现、测试与修复交给CodeBuddy，取代旧文中的默认WorkBuddy分工。Codex继续讨论需求、设计和思路。
 - 当前交接入口：`docs/CODEBUDDY-HANDOFF.md`。当前源码仍为frontend/hongfeng-preview，旧版保留；20%是用户阶段判断，不代表真实业务验收完成。
 - 本次只更新本地版本与交接，不自动调用CodeBuddy CLI、不组织双AI循环、不自动推远程或再次部署。后续发布按用户具体任务执行。
+
+## 2026-11-15 GitHub 与其他编辑器
+
+- 仓库：`13764190936/Hongxin-Program`，默认分支main。当前设计、业务范围与CodeBuddy分工保持不变；操作入口：docs/GITHUB-SYNC.md。
+- 当前Mac父仓库使用subtree同步本子目录，不初始化嵌套仓库，不直接推送父仓库main。其他编辑器在独立目录克隆GitHub时，本文件所在目录就是仓库根目录，可正常pull/push，不依赖父级AGENTS.md或VERSION-CONTROL.md。
+- 开始前检查状态并拉取他人更新，只提交本任务文件；不强制覆盖。不自动调用CLI、不自动推送或部署；按用户具体任务执行。

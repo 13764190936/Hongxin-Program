@@ -7,10 +7,10 @@
 
 ## 从哪里接手
 
-- 唯一Git仓库：`/Users/jiang/Documents/ChatGPT/鸿风软件开发`，业务工程为其下 `Hongxin-Program/`。
+- 当前Mac工作仓库：`/Users/jiang/Documents/ChatGPT/鸿风软件开发`，业务工程为其下 `Hongxin-Program/`。GitHub：`13764190936/Hongxin-Program`，`main`；其他编辑器可独立克隆，项目直接位于仓库根目录。操作见 [GitHub同步说明](GITHUB-SYNC.md)。
 - 当前前端设计：`frontend/hongfeng-preview/`。不要在旧副本或下载ZIP里另起工程，不初始化嵌套仓库。
 - 公网预览：https://demo.jerry1325.cn/ 。本地可双击 `启动设计预览.command`。
-- 先读本说明、两级AGENTS.md、根目录VERSION-CONTROL.md、docs/REQUIREMENTS.md、docs/HONGFENG-MASTER-V1.0.md和DESIGN.md。
+- 先读本说明、项目AGENTS.md、docs/GITHUB-SYNC.md、docs/REQUIREMENTS.md、docs/HONGFENG-MASTER-V1.0.md和DESIGN.md。当前Mac父仓库另读父级AGENTS.md与VERSION-CONTROL.md；独立GitHub克隆不依赖父目录文件。
 - 具体设计：[V1.1.0版本说明](design/HONGFENG-DESIGN-V1.1.0.md)、[早起页更新](design/EARLY-PAGE-UPDATE.md)。发布配置与回滚：[域名部署记录](deploy/DEMO-DOMAIN-20261114.md)。
 
 ## 必须保留的当前方向
@@ -34,7 +34,7 @@
 
 先读实际代码并评估可复用后端，提出微信小程序、登录与持久化的最小闭环方案，再由用户确认具体实施任务。每次聚焦一到两个核心问题，按既定MVP范围逐模块完成真实数据闭环，不增加团队、PK、综合评分等暂缓内容。
 
-开始前检查git status与任务占用，不覆盖他人未提交工作；共享环境须实际读写验证。完成独立任务后只暂存本任务明确路径、更新交接和验证记录。Git仅本地，无远程自动同步；网站后续发布应按用户明确任务进行，不能把本次发布授权当成永久自动部署许可。
+开始前检查git status与任务占用，不覆盖他人未提交工作；共享环境须实际读写验证。完成独立任务后只暂存本任务明确路径、更新交接和验证记录。2026-11-15已按用户要求接入GitHub；后续推送与网站发布按用户具体任务执行，没有自动同步或自动部署。当前Mac用subtree同步，独立克隆正常pull/push，不能混用两种目录结构。
 
 ## 验证边界
 
