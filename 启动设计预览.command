@@ -27,7 +27,7 @@ try:
                 raise RuntimeError(f'预览服务未能启动，详情见：{log}')
         else:
             raise RuntimeError(f'预览服务启动超时，详情见：{log}')
-    webbrowser.open(url + '?release=design-v1.0.0')
+    webbrowser.open(url + '?release=design-v1.1.0')
     print('鸿风设计预览已打开。关闭此窗口不影响预览。重启电脑后可再次双击本文件。')
 except Exception as error:
     print(f'无法打开预览：{error}')

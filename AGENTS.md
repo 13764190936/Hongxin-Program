@@ -26,3 +26,9 @@
 - 用户已确认并要求归档 `design-v1.0.0`；当前界面入口为 `frontend/hongfeng-preview/README.md`，设计决策见 `docs/design/HONGFENG-DESIGN-V1.0.0.md`。旧 home-wheel/prototype 与 orb-preview 仅作历史，不自动回退其视觉和导航。
 - 早起是首页右滑进入、左滑返回的独立空间，不属于运动，也不是第四个轮播项。本条覆盖总纲原文的旧界面分组。
 - 本版为设计原型，无真实登录、服务端打卡或持久化；归档不表示真实业务完成，不改变后续实现分工。
+
+## 2026-11-14 最新接续分工与里程碑
+
+- 用户确认首版工作目前约完成20%，保存为design-v1.1.0；后续实现、测试与修复交给CodeBuddy，取代旧文中的默认WorkBuddy分工。Codex继续讨论需求、设计和思路。
+- 当前交接入口：`docs/CODEBUDDY-HANDOFF.md`。当前源码仍为frontend/hongfeng-preview，旧版保留；20%是用户阶段判断，不代表真实业务验收完成。
+- 本次只更新本地版本与交接，不自动调用CodeBuddy CLI、不组织双AI循环、不自动推远程或再次部署。后续发布按用户具体任务执行。

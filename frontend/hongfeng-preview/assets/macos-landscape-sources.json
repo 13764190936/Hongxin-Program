@@ -1,0 +1,98 @@
+{
+  "prepared_on": "2026-11-14",
+  "selected": [
+    {
+      "file": "macos-bigsur-coast.jpg",
+      "title": "Big Sur Day",
+      "macos_release": "macOS Big Sur 11",
+      "landscape": true,
+      "visually_checked": true,
+      "visual_description": "真实自然风景：Big Sur海岸、群山、Bixby Bridge与蓝海；非Colorful抽象版本。",
+      "mirror_download_url": "https://media.512pixels.net/downloads/macos-wallpapers-6k/11-Big-Sur-Day-6k.jpg",
+      "mirror_archive_page": "https://512pixels.net/projects/default-mac-wallpapers-in-5k/",
+      "source_type": "512 Pixels archive mirror of Apple macOS wallpaper; not an Apple-hosted download",
+      "attribution_evidence": {
+        "url": "https://512pixels.net/projects/default-mac-wallpapers-in-5k/",
+        "description": "Archive labels this image as Big Sur Day under macOS Big Sur 11; natural photograph visually matches the classic macOS bundled wallpaper.",
+        "apple_system_supporting_source": "/System/Library/Desktop Pictures/Big Sur.madesktop"
+      },
+      "original_download_file": "bigsur-original.jpg",
+      "original_dimensions": [
+        6016,
+        6016
+      ],
+      "output_dimensions": [
+        2000,
+        2000
+      ],
+      "bytes": 1048402,
+      "sha256": "8516c90c35cb6210c4c7d157e1d1984c29bdbf8da1fe85014a0bedc1274433d0",
+      "copyright_scope": "Apple macOS bundled wallpaper artwork. Individual photographer and independent reuse/commercial-use license not verified. 512 Pixels is the archival mirror, not the creator or Apple official CDN.",
+      "processing": "Only resized/re-encoded with macOS sips; no AI generation, no visual retouching."
+    },
+    {
+      "file": "macos-catalina-island.jpg",
+      "title": "Catalina Day",
+      "macos_release": "macOS Catalina 10.15",
+      "landscape": true,
+      "visually_checked": true,
+      "visual_description": "真实自然风景：Catalina海岛岩脊与紫蓝色海面。",
+      "mirror_download_url": "https://media.512pixels.net/downloads/macos-wallpapers-6k/10-15-Day-6k.jpg",
+      "mirror_archive_page": "https://512pixels.net/projects/default-mac-wallpapers-in-5k/",
+      "source_type": "512 Pixels archive mirror of Apple macOS wallpaper; not an Apple-hosted download",
+      "attribution_evidence": {
+        "url": "https://512pixels.net/projects/default-mac-wallpapers-in-5k/",
+        "description": "Archive labels this image as Catalina Day under macOS Catalina 10.15; natural photograph visually matches the classic macOS bundled wallpaper.",
+        "apple_system_supporting_source": "/System/Library/Desktop Pictures/Catalina.madesktop"
+      },
+      "original_download_file": "catalina-original.jpg",
+      "original_dimensions": [
+        6016,
+        6016
+      ],
+      "output_dimensions": [
+        2200,
+        2200
+      ],
+      "bytes": 975085,
+      "sha256": "29837eb0fb6021150280b8258b79c591393cd7e420d04d1deb26367392fd623e",
+      "copyright_scope": "Apple macOS bundled wallpaper artwork. Individual photographer and independent reuse/commercial-use license not verified. 512 Pixels is the archival mirror, not the creator or Apple official CDN.",
+      "processing": "Only resized/re-encoded with macOS sips; no AI generation, no visual retouching."
+    },
+    {
+      "file": "macos-mojave-desert.jpg",
+      "title": "Mojave Day",
+      "macos_release": "macOS Mojave 10.14",
+      "landscape": true,
+      "visually_checked": true,
+      "visual_description": "真实自然风景：Mojave金色沙丘、山脉与云天。",
+      "mirror_download_url": "https://media.512pixels.net/downloads/macos-wallpapers-6k/10-14-Day-6k.jpg",
+      "mirror_archive_page": "https://512pixels.net/projects/default-mac-wallpapers-in-5k/",
+      "source_type": "512 Pixels archive mirror of Apple macOS wallpaper; not an Apple-hosted download",
+      "attribution_evidence": {
+        "url": "https://512pixels.net/projects/default-mac-wallpapers-in-5k/",
+        "description": "Archive labels this image as Mojave Day under macOS Mojave 10.14; natural photograph visually matches the classic macOS bundled wallpaper.",
+        "apple_system_supporting_source": null
+      },
+      "original_download_file": "mojave-original.jpg",
+      "original_dimensions": [
+        6016,
+        3384
+      ],
+      "output_dimensions": [
+        2200,
+        1237
+      ],
+      "bytes": 301143,
+      "sha256": "cd585291cdf29904c069a38711b13afcb1b56642f7b0007d4da3540ff2d3a9c9",
+      "copyright_scope": "Apple macOS bundled wallpaper artwork. Individual photographer and independent reuse/commercial-use license not verified. 512 Pixels is the archival mirror, not the creator or Apple official CDN.",
+      "processing": "Only resized/re-encoded with macOS sips; no AI generation, no visual retouching."
+    }
+  ],
+  "excluded": [
+    "macos-imac-blue.jpg",
+    "macos-imac-pink.jpg",
+    "macos-sonoma-green.jpg"
+  ],
+  "note": "Earlier abstract candidates are explicitly excluded by user correction; only the three landscape files in selected are intended for use."
+}

@@ -23,3 +23,7 @@
 - 修改范围：新增 frontend/hongfeng-preview/ 与设计版本记录；同步当前需求、设计与交接入口、日志和协作约定。旧 home-wheel/prototype、orb-preview、server 与 sports-demo 代码保留。
 - 交付版本：design-v1.0.0（设计原型，不是生产版本）；当前三模块滚轮、独立右滑早起空间与左滑返回、风景/圆形按钮均按用户确认归档。
 - 不纳入本任务：已有未跟踪 codebuddy-ready.txt；真实登录、后端、真实打卡记录、上线或远程同步。
+
+## 2026-11-14 最新交接：design-v1.1.0 / 首版20%
+
+用户确认首版工作约完成20%，要求更新Git，后续由CodeBuddy负责实现、测试与修复。当前入口改为docs/CODEBUDDY-HANDOFF.md；上方旧任务、旧原型与WorkBuddy默认分工仅作历史。本轮归档已确认早起更新、macOS素材、验证截图和域名发布记录，不自动开始下一项业务开发或再次部署。

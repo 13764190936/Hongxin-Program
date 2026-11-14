@@ -32,7 +32,7 @@ $('#morningEntry').addEventListener('click',open);$('#morningBack').addEventList
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(phase==='early'||phase==='entering')){e.preventDefault();back();}});
 // Two horizontal lanes: home -> right -> morning; morning -> left -> home.
 function startSwipe(e,origin){
- if(!e.isPrimary||e.button!==0||phase!==origin||document.body.classList.contains('transitioning')||e.target.closest('a,button,input,textarea'))return;
+ if(!e.isPrimary||e.button!==0||phase!==origin||document.body.classList.contains('transitioning')||e.target.closest('a,button,input,textarea,select,[contenteditable=true]'))return;
  swipe={id:e.pointerId,x:e.clientX,y:e.clientY,start:performance.now(),mode:null,origin};
 }
 home.addEventListener('pointerdown',e=>startSwipe(e,'home'),true);
@@ -89,21 +89,50 @@ document.addEventListener('wheel',e=>{
 document.addEventListener('pointerup',e=>endSwipe(e),true);document.addEventListener('pointercancel',e=>endSwipe(e,true),true);
 // Preview-only check-in state. No network request, user record, or persistent completion is produced.
 const clockFormat=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
-let demoStart=null,demoDone=null,liveDone=null;
-function clock(){const parts=Object.fromEntries(clockFormat.formatToParts(new Date()).map(p=>[p.type,p.value]));let h=Number(parts.hour),m=Number(parts.minute),s=Number(parts.second);if(demoStart!==null){const elapsed=Math.floor((performance.now()-demoStart)/1000);h=5;m=30+Math.floor((20+elapsed)/60);s=(20+elapsed)%60;}return{day:`${parts.year}.${parts.month}.${parts.day}`,time:[h,m,s].map(v=>String(v).padStart(2,'0')).join(':'),seconds:h*3600+m*60+s};}
+let preview=null,demoDone=null,liveDone=null;
+const previewStarts={waiting:17400,countdown:18900,ready:19820,ended:20700,steps:22200};
+function clock(){
+ const parts=Object.fromEntries(clockFormat.formatToParts(new Date()).map(p=>[p.type,p.value]));
+ let seconds=Number(parts.hour)*3600+Number(parts.minute)*60+Number(parts.second);
+ if(preview)seconds=previewStarts[preview.mode]+Math.floor((performance.now()-preview.start)/1000);
+ const h=Math.floor(seconds/3600)%24,m=Math.floor(seconds/60)%60,s=seconds%60;
+ return {day:`${parts.year}.${parts.month}.${parts.day}`,time:[h,m,s].map(v=>String(v).padStart(2,'0')).join(':'),seconds};
+}
 function renderClock(){
  if(phase==='home')return;
- const now=clock(),done=demoStart===null?liveDone:demoDone,validDone=done?.day===now.day,ready=now.seconds>=19800&&now.seconds<19860;
- const button=$('#checkinButton');button.disabled=!ready||validDone;button.classList.toggle('is-ready',ready&&!validDone);button.classList.toggle('is-done',!!validDone);
+ const now=clock(),done=preview?demoDone:liveDone,validDone=done?.day===now.day;
+ const state=now.seconds<18000?'waiting':now.seconds<19800?'countdown':now.seconds<19860?(validDone?'done':'ready'):now.seconds<21600?'ended':'steps';
+ const button=$('#checkinButton'),kicker=$('#checkinKicker');
+ button.disabled=state!=='ready';page.dataset.stage=state;
+ for(const name of ['waiting','countdown','ready','done','ended','steps'])button.classList.toggle('is-'+name,state===name);
  $('#morningDate').textContent=now.day;$('#morningClock').textContent=now.time;
- if(validDone){$('#checkinLabel').textContent='已打卡';$('#checkinSub').textContent=done.time;$('#morningStatus').textContent='今天，从坚持开始。';}
- else if(ready){const remaining=19860-now.seconds;$('#checkinLabel').textContent='打卡';$('#checkinSub').textContent=`还剩 ${String(remaining).padStart(2,'0')} 秒`;$('#morningStatus').textContent='此刻，开启新的一天。';}
- else if(now.seconds<19800){$('#checkinLabel').textContent='未开始';$('#checkinSub').textContent='05:30 开始';$('#morningStatus').textContent='还未到时间，清晨见。';}
- else{$('#checkinLabel').textContent='已结束';$('#checkinSub').textContent='明早 05:30';$('#morningStatus').textContent='今日窗口已结束，不支持补签。';}
- button.setAttribute('aria-label',`早起打卡：${$('#checkinLabel').textContent}，${$('#checkinSub').textContent}`);
+ kicker.hidden=true;kicker.textContent='';let label='',sub='',status='',progress=0;
+ if(state==='countdown'){
+  const left=19800-now.seconds;
+  kicker.hidden=false;kicker.textContent='距打卡开始';label=`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;sub='05:30 开始';status='清晨将至，准备好新的开始。';progress=(now.seconds-18000)/1800;
+ }else if(state==='ready'){
+  label='打卡';sub=`还剩 ${String(19860-now.seconds).padStart(2,'0')} 秒`;status='此刻，开启新的一天。';progress=(19860-now.seconds)/60;
+ }else if(state==='done'){
+  label='已打卡';sub=done.time;status='今天，从坚持开始。';progress=1;
+ }else if(state==='ended'){
+  label='打卡结束';sub='明早 05:30';status=validDone?`今天已于 ${done.time} 完成打卡。`:'今日窗口已结束，不支持补签。';
+ }else if(state==='steps'){
+  kicker.hidden=false;kicker.textContent='今日步数';label='—';sub='步 · 待同步';status='微信步数尚未接入，暂不显示数值。';
+ }else{label='未开始';sub='05:30 开始';status='还未到时间，清晨见。';}
+ $('#checkinLabel').textContent=label;$('#checkinSub').textContent=sub;$('#morningStatus').textContent=status;
+ const circumference=2*Math.PI*114,ring=$('#morningProgress');ring.style.strokeDasharray=String(circumference);ring.style.strokeDashoffset=String(circumference*(1-Math.max(0,Math.min(1,progress))));ring.style.opacity=progress>0?'1':'0';
+ button.setAttribute('aria-label',state==='steps'?'今日个人步数：待同步，尚未接入微信步数':`早起打卡：${kicker.textContent}${label}，${sub}`);
 }
-$('#checkinButton').addEventListener('click',()=>{const now=clock();if(now.seconds<19800||now.seconds>=19860)return;const done={day:now.day,time:now.time};if(demoStart===null){if(liveDone?.day===now.day)return;liveDone=done;}else{if(demoDone?.day===now.day)return;demoDone=done;}renderClock();});
-$('#morningExperience').addEventListener('click',()=>{demoStart=demoStart===null?performance.now():null;demoDone=null;$('#morningExperience').textContent=demoStart===null?'体验打卡时段':'退出体验';$('#morningExperience').setAttribute('aria-pressed',String(demoStart!==null));$('#morningPreviewNote').textContent=demoStart===null?'设计预览 · 不保存真实打卡记录':'体验模式 · 模拟 05:30 时段，不保存记录';renderClock();});
+$('#checkinButton').addEventListener('click',()=>{
+ const now=clock();if(now.seconds<19800||now.seconds>=19860)return;
+ if((preview?demoDone:liveDone)?.day===now.day)return;
+ const done={day:now.day,time:now.time};if(preview)demoDone=done;else liveDone=done;renderClock();
+ if(!reduce())motion($('#checkinButton'),[{transform:'scale(.97)'},{transform:'scale(1)'}],200);
+});
+$('#morningScenario').addEventListener('change',e=>{
+ const mode=e.target.value;preview=mode==='live'?null:{mode,start:performance.now()};demoDone=null;
+ $('#morningPreviewNote').textContent=preview?'体验模式 · 模拟时段，不保存记录；步数未接入':'设计预览 · 不保存真实打卡记录';renderClock();
+});
 for(const button of document.querySelectorAll('[data-scene]'))button.addEventListener('click',()=>{page.dataset.scene=button.dataset.scene;for(const other of document.querySelectorAll('[data-scene]'))other.setAttribute('aria-pressed',String(other===button));});
 setInterval(renderClock,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)renderClock();});
 })();
