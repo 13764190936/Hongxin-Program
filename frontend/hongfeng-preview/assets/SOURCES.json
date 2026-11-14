@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-14",
+  "purpose": "独立设计预览，示意照片非用户业务记录",
+  "license_page": "https://unsplash.com/license",
+  "images": [
+    {
+      "module": "运动",
+      "file": "assets/move.jpg",
+      "author": "Kevin Bessat",
+      "source": "https://unsplash.com/photos/man-running-through-a-misty-field-at-sunrise-RVV3BhlwNHY",
+      "image": "https://images.unsplash.com/photo-1765972096707-a96418fa0c9b?auto=format&fit=crop&w=1200&q=85"
+    },
+    {
+      "module": "读书",
+      "file": "assets/read.jpg",
+      "author": "Aaron Burden",
+      "source": "https://unsplash.com/photos/person-reading-a-book-with-hands-on-top-of-book-fgmf2Eyrwm4",
+      "image": "https://images.unsplash.com/photo-1453748866136-b1dd97284f49?auto=format&fit=crop&w=1200&q=85"
+    },
+    {
+      "module": "拜访",
+      "file": "assets/visit.jpg",
+      "author": "Vitaly Gariev",
+      "source": "https://unsplash.com/photos/two-business-people-conversing-others-observing-w94BC3z_dVY",
+      "image": "https://images.unsplash.com/photo-1758520144420-3e5b22e9b9a4?auto=format&fit=crop&w=1200&q=85"
+    }
+  ]
+}

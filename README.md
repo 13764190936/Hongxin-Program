@@ -1,3 +1,9 @@
+# 当前设计版本｜design-v1.0.0（2026-11-14）
+
+用户确认的正式设计原型已纳入本地Git：**[打开与接续说明](frontend/hongfeng-preview/README.md)**。首页三项目照片滚轮、点击左滑进入、独立早起页右滑进入与左滑返回，均以本版为准。旧设计及演示代码保留；当前仍是无后端的设计原型，不能视为真实小程序已完成。
+
+---
+
 # 当前入口｜HONGFENG 鸿风软件（2026-11-14）
 
 正式产品与设计依据：**[项目交接与设计开发总纲 V1.0](docs/HONGFENG-MASTER-V1.0.md)**。MVP 为运动、读书、拜访；视觉为国际主义平面设计 × Apple 极简主义。需求、问题与设计分别见 REQUIREMENTS.md、CUSTOMER-QUESTIONS.md 与根目录 DESIGN.md。

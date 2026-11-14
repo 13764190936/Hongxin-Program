@@ -1,0 +1,38 @@
+[
+  {
+    "file": "morning-lake.jpg",
+    "title": "Calm lake between mountains at sunrise",
+    "author": "Shai Pal",
+    "sourceUrl": "https://unsplash.com/photos/calm-lake-between-mountains-at-sunrise-WntO4gmkp7E",
+    "downloadUrl": "https://images.unsplash.com/photo-1777573087870-2cf5cab4421d?auto=format&fit=max&fm=jpg&q=85&w=1920",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "freePhotoVerified": true,
+    "downloadedAt": "2026-11-14",
+    "cropSuggestion": "Use cover at center / 50% 50%; vertical center crop retains the bright distant valley, lake and sky. At mobile ratios center or 54% horizontal works well.",
+    "visualNotes": "Quiet blue lake, sunlight on distant valley, no prominent people/buildings.",
+    "width": 1920,
+    "height": 1440,
+    "readable": true,
+    "sourceEmbedded": true,
+    "bytes": 311646
+  },
+  {
+    "file": "morning-mist.jpg",
+    "title": "Misty morning landscape over a calm lake",
+    "author": "Sergei Gussev",
+    "sourceUrl": "https://unsplash.com/photos/misty-morning-landscape-over-a-calm-lake-B1byhHBjUHM",
+    "downloadUrl": "https://images.unsplash.com/photo-1774617161542-31f864de9abe?auto=format&fit=max&fm=jpg&q=85&w=1920",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "freePhotoVerified": true,
+    "downloadedAt": "2026-11-14",
+    "cropSuggestion": "Use cover at 60% 50% for mobile portrait, preserving fog, river reflections and the right-side trees; center for landscape.",
+    "visualNotes": "Soft morning fog over Minho River; small distant left-side structures become peripheral or excluded in portrait crop.",
+    "width": 1920,
+    "height": 1440,
+    "readable": true,
+    "sourceEmbedded": true,
+    "bytes": 234154
+  }
+]
