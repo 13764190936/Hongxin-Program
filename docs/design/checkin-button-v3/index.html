@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>鸿心 · 打卡圆钮 v3</title>
+<style>
+/* ---------- 字体：全部本机，无 CDN ---------- */
+@font-face {
+  font-family: "GeistMono Local";
+  src: url("file:///usr/share/fonts/truetype/sand-box/google/Geist%20Mono/GeistMono-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+/* 中文走系统族名 Noto Sans CJK SC（思源黑体），断网可用 */
+
+/* ---------- 色板 ---------- */
+:root {
+  --ink: #17120E;
+  --ink-2: #6B6157;
+  --red: #E5372A;
+  --red-deep: #C02A1F;
+  --red-bright: #FF5A3C;
+  --white: #FFFFFF;
+  --font-cn: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "GeistMono Local", "Geist Mono", "SF Mono", Menlo, Consolas, monospace;
+  --ring-c: 571.77; /* 2πr, r = 91 */
+}
+[data-ver="warm"]  { --page: #FFFCF7; --surface: #F5EFE6; --line: #E9E1D5; }
+[data-ver="white"] { --page: #FFFFFF; --surface: #F4F2EF; --line: #E6E2DC; }
+
+/* ---------- 页面骨架 ---------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: #EEEDEB;
+  color: var(--ink);
+  font-family: var(--font-cn);
+  -webkit-font-smoothing: antialiased;
+  padding: 36px 48px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+/* 版本切换（纯 CSS，无 JS） */
+.view-switch { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; }
+#view-warm:checked  ~ main [data-ver="white"] { display: none; }
+#view-white:checked ~ main [data-ver="warm"]  { display: none; }
+
+.top {
+  width: 1088px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+.top h1 span {
+  margin-left: 10px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+.tabs { display: flex; gap: 4px; }
+.tabs label {
+  font-size: 12px;
+  line-height: 26px;
+  padding: 0 12px;
+  border-radius: 13px;
+  border: 1px solid transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+  user-select: none;
+}
+#view-both:checked  ~ .top label[for="view-both"],
+#view-warm:checked  ~ .top label[for="view-warm"],
+#view-white:checked ~ .top label[for="view-white"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+main { display: flex; flex-direction: column; gap: 36px; }
+
+/* ---------- 画板 ---------- */
+.artboard {
+  position: relative;
+  width: 1088px;
+  padding: 64px 56px 44px;
+  background: var(--page);
+  border: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+}
+.artboard__tag {
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+.artboard__tag b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.artboard__tag i {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+#art-countdown-stages { justify-content: center; gap: 168px; }
+
+/* 可打卡单独画板：480×480 纯白，flex 居中；无边框、无倒角、无阴影 */
+#art-available {
+  width: 480px;
+  height: 480px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #FFFFFF;
+  align-items: center;
+  justify-content: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.item__label {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+
+/* ---------- 圆钮基座：190px = 380rpx ---------- */
+.btn {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  transform-origin: 50% 50%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow: visible;
+}
+.btn__ring {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  width: 190px;
+  height: 190px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.btn__ring circle { fill: none; stroke-width: 3; }
+.ring-track { stroke: var(--line); }
+.ring-bar   { stroke-linecap: round; stroke-dasharray: var(--ring-c); }
+
+/* ---------- 1) 倒计时 ---------- */
+.btn--countdown .btn__kicker {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  color: var(--ink-2);
+  margin-bottom: 7px;
+}
+.btn--countdown .btn__num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+/* 距 05:30 越近，弧越长、色越亮 */
+.stage-2h  .ring-bar { stroke: rgba(229, 55, 42, 0.30);  stroke-dashoffset: 548.90; } /* 还有 2 小时 → 4%  */
+.stage-20m .ring-bar { stroke: var(--red);               stroke-dashoffset: 97.20;  } /* 还有 20 分钟 → 83% */
+.stage-1m  .ring-bar { stroke: var(--red-bright);        stroke-dashoffset: 8.58;   } /* 还有 1 分钟 → 98.5% */
+
+/* ---------- 2) 可打卡（呼吸脉动） ---------- */
+/* 钮与光晕同一圆心：钮是 190×190 正圆；光晕 ::after 用 inset:0 铺满钮的 padding box，
+   再向外描一圈同心 outline。两者都以 50% 50% 为原点只做 scale，不做 translate。 */
+.btn--available,
+.btn--pulse {
+  background: var(--red);
+  border: 0;
+  color: var(--white);
+  cursor: pointer;
+  animation: pulse-scale 2.4s ease-in-out infinite;
+  transition: transform 0.08s ease-out;
+}
+.btn--available::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 50%;
+  outline: 2px solid var(--red);
+  opacity: 0.35;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  animation: pulse-ring 2.4s ease-in-out infinite;
+}
+.btn--available .btn__main {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+}
+.btn--available:active,
+.btn--available.is-pressed {
+  animation: none;
+  transform: scale(0.97);
+}
+.btn--available:active::after,
+.btn--available.is-pressed::after { animation: none; opacity: 0; }
+
+@keyframes pulse-scale {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+@keyframes pulse-ring {
+  0%     { transform: scale(1);    opacity: 0.35; }
+  100%   { transform: scale(1.22); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn--available,
+  .btn--available::after { animation: none; }
+}
+
+/* ---------- 3) 已完成（深红实心，静态、不可再点） ---------- */
+.btn--done {
+  background: var(--red-deep);
+  border-color: var(--red-deep);
+  color: var(--white);
+}
+/* 对勾：短边在左下、长边向右上；白粗描边，圆头圆角 */
+.btn__check {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 8px;
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 11;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.btn--done .btn__title { font-size: 18px; font-weight: 700; letter-spacing: 0.1em; text-indent: 0.1em; }
+.btn--done .btn__time {
+  margin-top: 5px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* ---------- 4) 已结束未打卡（中性墨色空心，无红） ---------- */
+.btn--ended {
+  background: transparent;
+  border: 1.5px solid rgba(23, 18, 14, 0.72);
+  color: var(--ink);
+}
+.btn--ended .btn__title { font-size: 20px; font-weight: 600; letter-spacing: 0.1em; text-indent: 0.1em; }
+.btn--ended .btn__sub { margin-top: 6px; font-size: 13px; letter-spacing: 0.08em; color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<input class="view-switch" type="radio" name="view" id="view-both" checked>
+<input class="view-switch" type="radio" name="view" id="view-warm">
+<input class="view-switch" type="radio" name="view" id="view-white">
+
+<header class="top">
+  <h1>鸿心 · 打卡<span>v3</span></h1>
+  <nav class="tabs">
+    <label for="view-both">两版对比</label>
+    <label for="view-warm">版 1</label>
+    <label for="view-white">版 2</label>
+  </nav>
+</header>
+
+<main>
+
+  <!-- 版 1 · 四态总览 -->
+  <section class="artboard" id="art-overview-warm" data-ver="warm">
+    <div class="artboard__tag"><b>版 1</b> 暖白<i>#FFFCF7</i></div>
+    <div class="item">
+      <div class="btn btn--countdown stage-20m">
+        <svg class="btn__ring" viewBox="0 0 190 190" aria-hidden="true"><circle class="ring-track" cx="95" cy="95" r="91"/><circle class="ring-bar" cx="95" cy="95" r="91"/></svg>
+        <div class="btn__kicker">距打卡</div>
+        <div class="btn__num">00:20:00</div>
+      </div>
+      <div class="item__label">倒计时 · 20 分钟</div>
+    </div>
+    <div class="item">
+      <div class="btn btn--available btn--pulse">
+        <div class="btn__main">打卡</div>
+      </div>
+      <div class="item__label">可打卡</div>
+    </div>
+    <div class="item">
+      <div class="btn btn--done">
+        <svg class="btn__check" viewBox="0 0 100 100" aria-hidden="true"><polyline points="28,52 44,68 74,34"/></svg>
+        <div class="btn__title">已完成</div>
+        <div class="btn__time">05:30:12</div>
+      </div>
+      <div class="item__label">已完成</div>
+    </div>
+    <div class="item">
+      <div class="btn btn--ended">
+        <div class="btn__title">已结束</div>
+        <div class="btn__sub">不补签</div>
+      </div>
+      <div class="item__label">已结束</div>
+    </div>
+  </section>
+
+  <!-- 版 2 · 四态总览 -->
+  <section class="artboard" id="art-overview-white" data-ver="white">
+    <div class="artboard__tag"><b>版 2</b> 纯白<i>#FFFFFF</i></div>
+    <div class="item">
+      <div class="btn btn--countdown stage-20m">
+        <svg class="btn__ring" viewBox="0 0 190 190" aria-hidden="true"><circle class="ring-track" cx="95" cy="95" r="91"/><circle class="ring-bar" cx="95" cy="95" r="91"/></svg>
+        <div class="btn__kicker">距打卡</div>
+        <div class="btn__num">00:20:00</div>
+      </div>
+      <div class="item__label">倒计时 · 20 分钟</div>
+    </div>
+    <div class="item">
+      <div class="btn btn--available btn--pulse">
+        <div class="btn__main">打卡</div>
+      </div>
+      <div class="item__label">可打卡</div>
+    </div>
+    <div class="item">
+      <div class="btn btn--done">
+        <svg class="btn__check" viewBox="0 0 100 100" aria-hidden="true"><polyline points="28,52 44,68 74,34"/></svg>
+        <div class="btn__title">已完成</div>
+        <div class="btn__time">05:30:12</div>
+      </div>
+      <div class="item__label">已完成</div>
+    </div>
+    <div class="item">
+      <div class="btn btn--ended">
+        <div class="btn__title">已结束</div>
+        <div class="btn__sub">不补签</div>
+      </div>
+      <div class="item__label">已结束</div>
+    </div>
+  </section>
+
+  <!-- 倒计时三阶段（版 2 纯白底） -->
+  <section class="artboard" id="art-countdown-stages" data-ver="white">
+    <div class="artboard__tag"><b>倒计时三阶段</b> 越接近 05:30 越亮</div>
+    <div class="item">
+      <div class="btn btn--countdown stage-2h">
+        <svg class="btn__ring" viewBox="0 0 190 190" aria-hidden="true"><circle class="ring-track" cx="95" cy="95" r="91"/><circle class="ring-bar" cx="95" cy="95" r="91"/></svg>
+        <div class="btn__kicker">距打卡</div>
+        <div class="btn__num">02:00:00</div>
+      </div>
+      <div class="item__label">倒计时 · 2 小时</div>
+    </div>
+    <div class="item">
+      <div class="btn btn--countdown stage-20m">
+        <svg class="btn__ring" viewBox="0 0 190 190" aria-hidden="true"><circle class="ring-track" cx="95" cy="95" r="91"/><circle class="ring-bar" cx="95" cy="95" r="91"/></svg>
+        <div class="btn__kicker">距打卡</div>
+        <div class="btn__num">00:20:00</div>
+      </div>
+      <div class="item__label">倒计时 · 20 分钟</div>
+    </div>
+    <div class="item">
+      <div class="btn btn--countdown stage-1m">
+        <svg class="btn__ring" viewBox="0 0 190 190" aria-hidden="true"><circle class="ring-track" cx="95" cy="95" r="91"/><circle class="ring-bar" cx="95" cy="95" r="91"/></svg>
+        <div class="btn__kicker">距打卡</div>
+        <div class="btn__num">00:01:00</div>
+      </div>
+      <div class="item__label">倒计时 · 1 分钟</div>
+    </div>
+  </section>
+
+  <!-- 可打卡单独画板：录呼吸动画用（纯白底） -->
+  <section class="artboard" id="art-available" data-ver="white">
+    <div class="btn btn--available btn--pulse" id="btn-available">
+      <div class="btn__main">打卡</div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
